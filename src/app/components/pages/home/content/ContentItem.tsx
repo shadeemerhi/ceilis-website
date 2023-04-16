@@ -31,7 +31,7 @@ const ContentItem = ({
         />
       </div>
       <div className="flex flex-col justify-center items-center gap-4 flex-1">
-        <span className="text-4xl">{titleText}</span>
+        <span className="text-4xl whitespace-nowrap">{titleText}</span>
         <span className="text-lg font-light">{supplementalText}</span>
         {actionButton}
       </div>
