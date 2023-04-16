@@ -4,6 +4,7 @@ import { BsInstagram } from "react-icons/bs";
 import { RiFacebookFill } from "react-icons/ri";
 import { BiCopyright } from "react-icons/bi";
 import Link from "next/link";
+import { BUSINESS_NAME } from "@/app/util/constants";
 
 const Footer = () => {
   return (
@@ -22,7 +23,7 @@ const Footer = () => {
       <div className="flex items-center gap-1 text-sm text-zinc-400">
         <BiCopyright />
         <span>
-          Ceili's Modern Irish Pub. Developed by{" "}
+          {`${BUSINESS_NAME}. Developed by `}
           <Link href="">Shadee Merhi</Link>
         </span>
       </div>
