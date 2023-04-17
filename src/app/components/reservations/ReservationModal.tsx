@@ -9,6 +9,7 @@ import ReservationDetails from "./ReservationDetails";
 import ContactInformation from "./ContactInformation";
 import ReviewAndSubmit from "./ReviewAndSubmit";
 import Spinner from "../design-system/Spinner";
+import Stepper from "./Stepper";
 
 const RESERVATION_TYPES = [
   "Table Reservation",
@@ -172,10 +173,11 @@ const ReservationModal = () => {
 
   return (
     <Modal open={modalOpen} closeModal={closeReservationModal}>
-      <div className="flex flex-col items-center gap-4 w-[80vw] max-w-[460px] min-h-[400px]">
+      <div className="flex flex-col items-center gap-4 w-[80vw] max-w-[460px] min-h-[440px]">
         <span className="text-3xl text-white tracking-widest">
           Reservations
         </span>
+        <Stepper step={step} />
 
         <div className="flex flex-col justify-between tracking-widest w-4/5 md:w-2/3 flex-1">
           <div className="flex flex-col gap-4">
