@@ -1,10 +1,14 @@
-import React from "react";
 import Button from "../design-system/Button";
+import ReservationButton from "../reservations/ReservationButton";
 
 const ActionButtons = () => {
   return (
     <>
-      <Button text="Reservations" variant="border" />
+      <ReservationButton
+        text="Reservations"
+        variant="border"
+        textColor="white"
+      />
       <Button text="Order Now" variant="border" />
     </>
   );

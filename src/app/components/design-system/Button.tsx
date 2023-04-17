@@ -1,11 +1,12 @@
-type ButtonVariant = "default" | "border" | "fill";
-type ButtonTextColor = "white" | "black";
+export type ButtonVariant = "default" | "border" | "fill";
+export type ButtonTextColor = "white" | "black";
 
 interface IButtonProps {
   text: string;
   textColor?: ButtonTextColor;
   variant?: ButtonVariant;
   onClick?: () => void;
+  type?: "button" | "submit";
 }
 
 const Button = ({
@@ -13,9 +14,14 @@ const Button = ({
   textColor = "white",
   variant = "default",
   onClick,
+  type = "button",
 }: IButtonProps) => {
   return (
-    <button onClick={onClick} className={getButtonClasses(variant, textColor)}>
+    <button
+      onClick={onClick}
+      className={getButtonClasses(variant, textColor)}
+      type={type}
+    >
       {text}
     </button>
   );
@@ -31,16 +37,12 @@ const getButtonClasses = (
 
   if (variant === "border") {
     return (
-      baseClasses +
-      " px-4 border-[1px] border-yellow-500 hover:border-yellow-800"
+      baseClasses + " px-4 border-[1px] border-amber-500 hover:border-amber-300"
     );
   }
 
   if (variant === "fill") {
-    return (
-      baseClasses +
-      " px-4 border-[1px] border-yellow-500 bg-zinc-800 hover:bg-zinc-700"
-    );
+    return baseClasses + " px-4 bg-amber-500 hover:bg-amber-400";
   }
 
   return baseClasses;

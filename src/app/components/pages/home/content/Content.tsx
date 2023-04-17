@@ -3,6 +3,7 @@
 import Button from "@/app/components/design-system/Button";
 import React from "react";
 import ContentItem from "./ContentItem";
+import ReservationButton from "@/app/components/reservations/ReservationButton";
 
 const Content = () => {
   return (
@@ -26,9 +27,8 @@ const Content = () => {
         titleText="Section Two Text"
         supplementalText="This is some supplemental text"
         actionButton={
-          <Button
+          <ReservationButton
             text="Reserve Now"
-            onClick={() => {}}
             variant="border"
             textColor="black"
           />

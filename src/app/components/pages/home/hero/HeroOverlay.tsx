@@ -1,4 +1,5 @@
 import Button from "@/app/components/design-system/Button";
+import ReservationButton from "@/app/components/reservations/ReservationButton";
 import { BUSINESS_NAME } from "@/app/util/constants";
 
 const HeroOverlay = () => {
@@ -10,7 +11,7 @@ const HeroOverlay = () => {
         </span>
         <span className="text-xl font-light">The heart of Royal Oak</span>
       </div>
-      <Button text="Reserve Now" variant="fill" />
+      <ReservationButton text="Reserve Now" variant="fill" textColor="white" />
     </div>
   );
 };

@@ -1,8 +1,10 @@
-import Navbar from "./components/navigation/Navbar";
 import { Albert_Sans } from "next/font/google";
+import Navbar from "./components/navigation/Navbar";
 
-import "./globals.css";
 import MobileBottomNav from "./components/navigation/MobileBottomNav";
+import "./globals.css";
+import { Providers } from "./providers";
+import ReservationModal from "./components/reservations/ReservationModal";
 
 export const metadata = {
   title: "Ceili's Modern Irish Pub",
@@ -19,9 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${albertSans.className} relative h-screen w-screen`}>
-        <Navbar />
-        {children}
-        <MobileBottomNav />
+        <Providers>
+          <Navbar />
+          <ReservationModal />
+          {children}
+          <MobileBottomNav />
+        </Providers>
       </body>
     </html>
   );
