@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model FoodItem {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  price       Float
+  additions   Addition[]
+  sizes       Addition[]
+  categoryId  String       @db.ObjectId
+  category    FoodCategory @relation(fields: [categoryId], references: [id])
+}
+
+model FoodCategory {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  description   String?
+  substitutions Addition[]
+  additions     Addition[]
+  items         FoodItem[]
+}
+
+type Addition {
+  name  String
+  price Float
+}
+
+model BeerItem {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  description    String?
+  twelveOzPrice  Float
+  sixteenOzPrice Float
+  twentyOzPrice  Float
+  type           BeerType
+  tapType        BeerTapCategory?
+}
+
+enum BeerType {
+  Tap
+  Bottle
+}
+
+enum BeerTapCategory {
+  Local
+  Domestic
+  Import
+  Cocktail
+}
+
+model WineItem {
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  description    String?
+  sixOzPrice     Float
+  nineOzPrice    Float
+  halfLitrePrice Float
+  category       WineCategory
+}
+
+enum WineCategory {
+  White
+  Red
+  Sparkling
+  Cocktail
+}
+
+model SpiritItem {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  category    SpiritCategory
+}
+
+enum SpiritCategory {
+  ScotchWhiskey
+  IrishWhiskey
+  CanadianWhiskey
+  Tequila
+  Rum
+  Vodka
+  Gin
+  Specialty
+  Martini
+  Cocktail
+  Coffee
+}
