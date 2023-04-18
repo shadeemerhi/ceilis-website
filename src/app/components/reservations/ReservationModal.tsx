@@ -10,6 +10,7 @@ import ContactInformation from "./ContactInformation";
 import ReviewAndSubmit from "./ReviewAndSubmit";
 import Spinner from "../design-system/Spinner";
 import Stepper from "./Stepper";
+import Success from "./Success";
 
 const RESERVATION_TYPES = [
   "Table Reservation",
@@ -60,6 +61,7 @@ const ReservationModal = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -164,11 +166,34 @@ const ReservationModal = () => {
     setStep(3);
   };
 
-  const handleSubmit = () => {
-    setIsSubmitting(true);
-    setTimeout(() => {
+  const handleSubmit = async () => {
+    try {
+      setIsSubmitting(true);
+      setSubmitError(false);
+
+      const response = await fetch("/api/reservations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reservation),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create reservation");
+      }
+
+      const data = await response.json();
+
+      console.log("HERE IS DATA", data);
+
+      setStep(4);
+    } catch (error) {
+      console.log("handleSubmit error", error);
+      setSubmitError(true);
+    } finally {
       setIsSubmitting(false);
-    }, 3000);
+    }
   };
 
   return (
@@ -177,7 +202,7 @@ const ReservationModal = () => {
         <span className="text-3xl text-white tracking-widest">
           Reservations
         </span>
-        <Stepper step={step} />
+        {step < 4 && <Stepper step={step} />}
 
         <div className="flex flex-col justify-between tracking-widest w-4/5 md:w-2/3 flex-1">
           <div className="flex flex-col gap-4">
@@ -197,7 +222,13 @@ const ReservationModal = () => {
               />
             )}
             {step === 3 && <ReviewAndSubmit reservation={reservation} />}
+            {step === 4 && <Success />}
           </div>
+          {submitError && (
+            <span className="mt-6 text-red-500">
+              Something went wrong on our end. Please try again later.
+            </span>
+          )}
           <div className="flex justify-center items-center gap-3 w-full mt-10">
             {isSubmitting ? (
               <div className="h-12">
@@ -212,7 +243,7 @@ const ReservationModal = () => {
                     variant="fill"
                   />
                 )}
-                {step > 1 && (
+                {(step === 2 || step === 3) && (
                   <Button
                     text="Back"
                     onClick={() => setStep(step - 1)}
@@ -228,6 +259,13 @@ const ReservationModal = () => {
                 )}
                 {step === 3 && (
                   <Button text="Submit" onClick={handleSubmit} variant="fill" />
+                )}
+                {step === 4 && (
+                  <Button
+                    text="Close"
+                    onClick={closeReservationModal}
+                    variant="fill"
+                  />
                 )}
               </>
             )}
