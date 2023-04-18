@@ -1,3 +1,7 @@
+import CategorySection from "@/app/components/pages/menu/food/CategorySection";
+import CategorySelect from "@/app/components/pages/menu/food/CategorySelect";
+import { IFetchFoodMenuResponse } from "@/app/util/types";
+
 const FoodMenu = async () => {
   const response = await fetch(`${process.env.BASE_URL}/api/menu/food`);
 
@@ -5,13 +9,14 @@ const FoodMenu = async () => {
     throw new Error("Failed to fetch food menu");
   }
 
-  const data = await response.json();
-
-  console.log("HERE IS DATA", data);
+  const data = (await response.json()) as IFetchFoodMenuResponse;
 
   return (
-    <div className="border-2 border-red-500">
-      <div>Food Menu</div>
+    <div className="flex flex-col items-center">
+      {/* <CategorySelect /> */}
+      {data.categories.map((category) => (
+        <CategorySection category={category} />
+      ))}
     </div>
   );
 };

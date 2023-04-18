@@ -27,8 +27,8 @@ const MenuSelect = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col justify-end items-center h-52">
-      <div className="flex justify-between w-full md:w-4/5">
+    <div className="flex flex-col justify-end items-center h-52 bg-zinc-800">
+      <div className="flex justify-between w-full md:w-5/6">
         {SELECTION_ITEMS.map((item) => (
           <MenuSelectItem item={item} selected={item.pathname === pathname} />
         ))}
@@ -50,7 +50,7 @@ const MenuSelectItem = ({
     <Link
       href={pathname}
       className={`flex-1 text-center tracking-widest p-2 font-light cursor-pointer ${
-        selected && "bg-zinc-300 font-semibold text-black"
+        selected ? "bg-white font-semibold text-black" : "bg-zinc-200"
       }`}
     >
       <span>{text}</span>

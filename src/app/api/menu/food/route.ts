@@ -3,12 +3,12 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const data = await prisma.foodCategory.findMany({
+    const categories = await prisma.foodCategory.findMany({
       include: {
         items: true,
       },
     });
-    return NextResponse.json({ data });
+    return NextResponse.json({ categories });
   } catch (error) {
     console.log(error);
     return new NextResponse("Failed to fetch food items", {

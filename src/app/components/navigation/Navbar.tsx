@@ -17,7 +17,7 @@ const Navbar = () => {
       />
       <div className="flex items-center gap-8">
         <div className="hidden md:flex gap-4">
-          <NavLink text="Menu" href="/menu" />
+          <NavLink text="Menu" href="/menu/food" />
           <NavLink text="Gift Cards" href="/gift-cards" />
           <NavLink text="Contact Us" href="/contact" />
         </div>
