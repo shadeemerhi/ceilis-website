@@ -1,5 +1,4 @@
-import CategorySection from "@/app/components/pages/menu/food/CategorySection";
-import CategorySelect from "@/app/components/pages/menu/food/CategorySelect";
+import FoodSection from "@/app/components/pages/menu/food/CategorySection";
 import { IFetchFoodMenuResponse } from "@/app/util/types";
 
 const FoodMenu = async () => {
@@ -13,9 +12,8 @@ const FoodMenu = async () => {
 
   return (
     <div className="flex flex-col items-center">
-      {/* <CategorySelect /> */}
       {data.categories.map((category) => (
-        <CategorySection category={category} />
+        <FoodSection category={category} />
       ))}
     </div>
   );

@@ -27,7 +27,7 @@ const MenuSelect = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col justify-end items-center h-52 bg-zinc-800">
+    <div className="sticky top-0 flex flex-col justify-end items-center h-52 bg-zinc-800">
       <div className="flex justify-between w-full md:w-5/6">
         {SELECTION_ITEMS.map((item) => (
           <MenuSelectItem item={item} selected={item.pathname === pathname} />
@@ -53,7 +53,7 @@ const MenuSelectItem = ({
         selected ? "bg-white font-semibold text-black" : "bg-zinc-200"
       }`}
     >
-      <span>{text}</span>
+      <span className="whitespace-nowrap">{text}</span>
     </Link>
   );
 };

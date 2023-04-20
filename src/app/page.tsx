@@ -7,7 +7,6 @@ export default function Home() {
     <main className="pt-24">
       <Hero />
       <Content />
-      <Footer />
     </main>
   );
 }

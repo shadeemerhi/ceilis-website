@@ -5,6 +5,7 @@ import MobileBottomNav from "./components/navigation/MobileBottomNav";
 import "./globals.css";
 import { Providers } from "./providers";
 import ReservationModal from "./components/reservations/ReservationModal";
+import Footer from "./components/pages/home/footer/Footer";
 
 export const metadata = {
   title: "Ceili's Modern Irish Pub",
@@ -26,6 +27,7 @@ export default function RootLayout({
           <ReservationModal />
           {children}
           <MobileBottomNav />
+          <Footer />
         </Providers>
       </body>
     </html>

@@ -29,66 +29,58 @@ model FoodCategory {
 
 type Addition {
   name  String
-  price Float
+  price Float?
 }
 
 model BeerItem {
-  id             String           @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  description    String?
-  twelveOzPrice  Float
-  sixteenOzPrice Float
-  twentyOzPrice  Float
-  type           BeerType
-  tapType        BeerTapCategory?
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  location    String?
+  style       String?
+  description String?
+  price       Float
+  sizes       Addition[]
+  category    BeerCategory @relation(fields: [categoryId], references: [id])
+  categoryId  String       @db.ObjectId
 }
 
-enum BeerType {
-  Tap
-  Bottle
-}
-
-enum BeerTapCategory {
-  Local
-  Domestic
-  Import
-  Cocktail
+model BeerCategory {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  price       Float
+  sizes       Addition[]
+  items       BeerItem[]
 }
 
 model WineItem {
-  id             String       @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  description    String?
-  sixOzPrice     Float
-  nineOzPrice    Float
-  halfLitrePrice Float
-  category       WineCategory
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  location    String?
+  sizes       Addition[]
+  categoryId  String       @db.ObjectId
+  category    WineCategory @relation(fields: [categoryId], references: [id])
 }
 
-enum WineCategory {
-  White
-  Red
-  Sparkling
-  Cocktail
+model WineCategory {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  items       WineItem[]
 }
 
 model SpiritItem {
   id          String         @id @default(auto()) @map("_id") @db.ObjectId
   name        String
+  price       Float
   description String?
-  category    SpiritCategory
+  categoryId  String         @db.ObjectId
+  category    SpiritCategory @relation(fields: [categoryId], references: [id])
 }
 
-enum SpiritCategory {
-  ScotchWhiskey
-  IrishWhiskey
-  CanadianWhiskey
-  Tequila
-  Rum
-  Vodka
-  Gin
-  Specialty
-  Martini
-  Cocktail
-  Coffee
+model SpiritCategory {
+  id    String       @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  items SpiritItem[]
 }
