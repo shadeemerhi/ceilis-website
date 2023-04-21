@@ -1,4 +1,5 @@
 import prisma from "@/prisma/client";
+import { FoodItem } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -12,6 +13,17 @@ export async function GET() {
   } catch (error) {
     console.log(error);
     return new NextResponse("Failed to fetch food items", {
+      status: 500,
+    });
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const data = (await req.json()) as Omit<FoodItem, "id">;
+  } catch (error) {
+    console.log(error);
+    return new NextResponse("Failed to create food item", {
       status: 500,
     });
   }

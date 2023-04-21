@@ -29,6 +29,8 @@ export interface IFetchFoodMenuResponse {
   categories: Array<IFoodCategoryPopulated>;
 }
 
+export type ICreateFoodItemInput = Omit<FoodItem, "id"> & { id?: string };
+
 export interface IFetchDrinkMenuResponse {
   beerCategories: Array<IBeerCategoryPopulated>;
   wineCategories: Array<IWineCategoryPopulated>;
