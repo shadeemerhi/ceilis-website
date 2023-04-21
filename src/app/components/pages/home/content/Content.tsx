@@ -1,5 +1,3 @@
-"use client";
-
 import Button from "@/app/components/design-system/Button";
 import React from "react";
 import ContentItem from "./ContentItem";
@@ -15,7 +13,7 @@ const Content = () => {
         actionButton={
           <Button
             text="View Menu"
-            onClick={() => {}}
+            // onClick={() => {}}
             variant="border"
             textColor="black"
           />

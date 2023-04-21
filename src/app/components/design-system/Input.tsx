@@ -1,33 +1,11 @@
-import { ChangeEvent } from "react";
+import { HTMLProps } from "react";
 
-interface IInputProps {
-  id: string;
-  name: string;
-  value: string;
-  type: string;
-  placeholder?: string;
-  onChange: (e: ChangeEvent<any>) => void;
-}
-
-const Input = ({
-  id,
-  name,
-  value,
-  type,
-  onChange,
-  placeholder,
-}: IInputProps) => {
+const Input = (props: HTMLProps<HTMLInputElement>) => {
   return (
     <input
-      id={id}
-      name={name}
-      value={value}
-      type={type}
-      onChange={onChange}
-      placeholder={placeholder || ""}
-      required
+      {...props}
       className="
-        px-3 
+        px-2 
         py-1
         w-full 
         flex-1 

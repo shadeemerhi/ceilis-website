@@ -1,4 +1,4 @@
-import FoodSection from "@/app/components/pages/menu/food/CategorySection";
+import FoodSection from "@/app/components/pages/menu/food/FoodSection";
 import { IFetchFoodMenuResponse } from "@/app/util/types";
 
 const FoodMenu = async () => {

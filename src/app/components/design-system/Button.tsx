@@ -1,24 +1,20 @@
+import { HTMLProps } from "react";
+
 export type ButtonVariant = "default" | "border" | "fill";
 export type ButtonTextColor = "white" | "black";
 
-interface IButtonProps {
+interface IButtonProps extends HTMLProps<HTMLButtonElement> {
   text: string;
   textColor?: ButtonTextColor;
   variant?: ButtonVariant;
-  onClick?: () => void;
   type?: "button" | "submit";
 }
 
-const Button = ({
-  text,
-  textColor = "white",
-  variant = "default",
-  onClick,
-  type = "button",
-}: IButtonProps) => {
+const Button = (props: IButtonProps) => {
+  const { variant = "default", textColor = "white", text, type } = props;
   return (
     <button
-      onClick={onClick}
+      {...props}
       className={getButtonClasses(variant, textColor)}
       type={type}
     >

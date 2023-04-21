@@ -6,7 +6,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="pt-24">
+    <section className="relative pt-24">
       <MenuSelect />
       {children}
     </section>
