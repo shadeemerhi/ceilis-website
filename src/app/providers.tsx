@@ -13,7 +13,7 @@ export function Providers({ children }: IProvidersProps) {
   return (
     <ReservationModalProvider>
       {children}
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
     </ReservationModalProvider>
   );
 }

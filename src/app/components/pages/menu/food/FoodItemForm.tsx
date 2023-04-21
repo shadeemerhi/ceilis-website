@@ -1,41 +1,94 @@
 import Button from "@/app/components/design-system/Button";
 import Input from "@/app/components/design-system/Input";
+import Spinner from "@/app/components/design-system/Spinner";
 import { ICreateFoodItemInput } from "@/app/util/types";
 import { FoodItem as IFoodItem } from "@prisma/client";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from "react-toastify";
 
+const createFoodItem = async (input: ICreateFoodItemInput) => {
+  const response = await fetch("/api/menu/food", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(input),
+  });
+
+  if (!response.ok) {
+    throw new Error();
+  }
+
+  return response.json();
+};
+
+const updateFoodItem = async (input: IFoodItem) => {
+  const { id, ...rest } = input;
+  const response = await fetch(`/api/menu/food/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(rest),
+  });
+
+  if (!response.ok) {
+    throw new Error();
+  }
+
+  return response.json();
+};
+
 interface IFoodItemFormProps {
   item: IFoodItem | ICreateFoodItemInput;
+  setSelectedItem: Dispatch<
+    SetStateAction<IFoodItem | ICreateFoodItemInput | null>
+  >;
 }
 
-const FoodItemForm = ({ item }: IFoodItemFormProps) => {
+const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
   const [foodItem, setFoodItem] = useState<IFoodItem | ICreateFoodItemInput>(
     item
   );
 
   const [addingAddition, setAddingAddition] = useState(false);
   const [addingSize, setAddingSize] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const [isFetching, setIsFetching] = useState(false);
+  const isMutating = isPending || isFetching;
+  const router = useRouter();
 
   const onSubmit = async () => {
-    const isUpdatingItem = !!foodItem.id;
-
-    if (isUpdatingItem) {
-      // update item
-    } else {
-      // create item
+    if (!foodItem.name) {
+      toast.error("Please enter a name for the item");
+      return;
     }
 
-    const resolveAfter3Sec = new Promise((resolve) =>
-      setTimeout(resolve, 3000)
-    );
-    toast.promise(resolveAfter3Sec, {
-      pending: "Saving item...",
-      success: "Item successfully saved",
-      error: "Failed to save item",
-    });
+    const isUpdatingItem = !!foodItem.id;
+
+    setIsFetching(true);
+
+    try {
+      isUpdatingItem
+        ? await updateFoodItem(foodItem as IFoodItem)
+        : await createFoodItem(foodItem);
+
+      startTransition(() => {
+        router.refresh();
+      });
+
+      toast.success(
+        `Successfully ${isUpdatingItem ? "updated" : "created"} item`
+      );
+      setSelectedItem(null);
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to save item");
+    } finally {
+      setIsFetching(false);
+    }
   };
 
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +112,17 @@ const FoodItemForm = ({ item }: IFoodItemFormProps) => {
     setFoodItem((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  };
+
+  const onPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
+
+    setFoodItem((prev) => ({
+      ...prev,
+      price: parseFloat(parseFloat(value).toFixed(2)),
     }));
   };
 
@@ -109,9 +173,10 @@ const FoodItemForm = ({ item }: IFoodItemFormProps) => {
             <Input
               id="price"
               name="price"
-              onChange={() => {}}
+              onChange={onPriceChange}
               value={foodItem.price.toString()}
               step="0.01"
+              min="0"
               placeholder="Price"
               type="number"
             />
@@ -187,12 +252,16 @@ const FoodItemForm = ({ item }: IFoodItemFormProps) => {
         </div>
       </div>
       <div className="flex justify-end">
-        <Button
-          text="Save Item"
-          textColor="white"
-          variant="fill"
-          onClick={onSubmit}
-        />
+        {isMutating ? (
+          <Spinner size="w-10 h-10" color="text-amber-500" />
+        ) : (
+          <Button
+            text="Save Item"
+            textColor="white"
+            variant="fill"
+            onClick={onSubmit}
+          />
+        )}
       </div>
     </div>
   );
