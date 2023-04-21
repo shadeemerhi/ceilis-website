@@ -3,10 +3,10 @@
 import Button from "@/app/components/design-system/Button";
 import { ICreateFoodItemInput, IFoodCategoryPopulated } from "@/app/util/types";
 import MenuSection from "../MenuSection";
-import FoodItem from "./FootItem";
+import FoodItem from "./item/FootItem";
 import { useState } from "react";
 import { FoodItem as IFoodItem } from "@prisma/client";
-import FoodItemForm from "./FoodItemForm";
+import FoodItemForm from "./item/form/FoodItemForm";
 
 interface IFoodSectionProps {
   category: IFoodCategoryPopulated;

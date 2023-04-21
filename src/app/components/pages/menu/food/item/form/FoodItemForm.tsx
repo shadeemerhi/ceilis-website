@@ -2,11 +2,12 @@ import Button from "@/app/components/design-system/Button";
 import Input from "@/app/components/design-system/Input";
 import Spinner from "@/app/components/design-system/Spinner";
 import { ICreateFoodItemInput } from "@/app/util/types";
-import { FoodItem as IFoodItem } from "@prisma/client";
+import { Addition, FoodItem as IFoodItem } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from "react-toastify";
+import AdditionInputs from "./AdditionInputs";
 
 const createFoodItem = async (input: ICreateFoodItemInput) => {
   const response = await fetch("/api/menu/food", {
@@ -52,9 +53,10 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
   const [foodItem, setFoodItem] = useState<IFoodItem | ICreateFoodItemInput>(
     item
   );
-
   const [addingAddition, setAddingAddition] = useState(false);
   const [addingSize, setAddingSize] = useState(false);
+  const [size, setSize] = useState<Addition>({ name: "", price: 0 });
+
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
   const isMutating = isPending || isFetching;
@@ -126,18 +128,81 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
     }));
   };
 
-  const onAddSize = () => {};
-  const onDeleteSize = () => {};
+  /**
+   * Sizes
+   */
+  const onSizeNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = event;
 
-  const onAddAddition = () => {};
-  const onDeleteAddition = () => {};
+    setSize((prev) => ({ ...prev, name: value }));
+  };
+
+  const onSizePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = event;
+
+    setSize((prev) => ({
+      ...prev,
+      price: parseFloat(parseFloat(value).toString()),
+    }));
+  };
+
+  const createSize = (size: Addition) => {
+    const existingSize = foodItem.sizes.find((s) => s.name === size.name);
+
+    if (existingSize) {
+      toast.error("Size with that name already exists");
+      return;
+    }
+
+    setFoodItem((prev) => ({
+      ...prev,
+      sizes: [...prev.sizes, size],
+    }));
+  };
+
+  const deleteSize = (size: Addition) => {
+    setFoodItem((prev) => ({
+      ...prev,
+      sizes: prev.sizes.filter((s) => s.name !== size.name),
+    }));
+  };
+
+  /**
+   * Additions
+   */
+  const createAddition = (addition: Addition) => {
+    const existingAddition = foodItem.additions.find(
+      (a) => a.name === addition.name
+    );
+
+    if (existingAddition) {
+      toast.error("Addition with that name already exists");
+      return;
+    }
+
+    setFoodItem((prev) => ({
+      ...prev,
+      additions: [...prev.additions, addition],
+    }));
+  };
+
+  const deleteAddition = (addition: Addition) => {
+    setFoodItem((prev) => ({
+      ...prev,
+      additions: prev.additions.filter((a) => a.name !== addition.name),
+    }));
+  };
 
   return (
     <div className="border-[1px] border-zinc-200 p-6 rounded-lg">
       <span className="text-xl">
         {item.id ? `Editing Item: ${item.name}` : "Creating Item"}
       </span>
-      <div className="grid grid-cols-1 gap-8 mt-6">
+      <div className="grid grid-cols-1 gap-12 mt-6">
         <div className="flex flex-col gap-1">
           <label htmlFor="name">Name</label>
           <Input
@@ -191,7 +256,11 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
                   <div>
                     <div className="flex justify-between">
                       <label htmlFor={item.name}>{item.name}</label>
-                      <AiOutlineDelete size={20} className="cursor-pointer" />
+                      <AiOutlineDelete
+                        size={20}
+                        className="cursor-pointer"
+                        onClick={() => deleteSize(item)}
+                      />
                     </div>
                     <Input
                       id={item.name}
@@ -211,12 +280,20 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
               </span>
             )}
           </div>
-          <Button
-            text="Add Size"
-            textColor="black"
-            variant="border"
-            onClick={() => {}}
-          />
+          {addingSize ? (
+            <AdditionInputs
+              additionType="size"
+              createAddition={createSize}
+              cancel={() => setAddingSize(false)}
+            />
+          ) : (
+            <Button
+              text="Add Size"
+              textColor="black"
+              variant="border"
+              onClick={() => setAddingSize(true)}
+            />
+          )}
         </div>
         <div className="flex flex-col gap-4">
           <span className="font-semibold">Additions</span>
@@ -227,7 +304,11 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
                   <div>
                     <div className="flex justify-between">
                       <label htmlFor={item.name}>{item.name}</label>
-                      <AiOutlineDelete size={20} className="cursor-pointer" />
+                      <AiOutlineDelete
+                        size={20}
+                        className="cursor-pointer"
+                        onClick={() => deleteAddition(item)}
+                      />
                     </div>
                     <Input
                       id={item.name}
@@ -243,12 +324,20 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
               <span>This item currently has no additions</span>
             )}
           </div>
-          <Button
-            text="Add Addition"
-            textColor="black"
-            variant="border"
-            onClick={() => {}}
-          />
+          {addingAddition ? (
+            <AdditionInputs
+              additionType="addition"
+              createAddition={createAddition}
+              cancel={() => setAddingAddition(false)}
+            />
+          ) : (
+            <Button
+              text="Add Addition"
+              textColor="black"
+              variant="border"
+              onClick={() => setAddingAddition(true)}
+            />
+          )}
         </div>
       </div>
       <div className="flex justify-end">

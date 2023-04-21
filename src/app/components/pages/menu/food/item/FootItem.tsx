@@ -1,7 +1,7 @@
 import { ICreateFoodItemInput } from "@/app/util/types";
 import { FoodItem as IFoodItem } from "@prisma/client";
 import { Dispatch, SetStateAction } from "react";
-import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import ItemActionIcons from "./ItemActionIcons";
 
 interface IFoodItemProps {
   item: IFoodItem;
@@ -30,14 +30,11 @@ const FoodItem = ({ item, setSelectedItem }: IFoodItemProps) => {
         )}
       </div>
       <span className="text-zinc-500 font-light">{item.description}</span>
-      <div className="flex gap-2 mt-2">
-        <AiOutlineEdit
-          size={20}
-          className="cursor-pointer"
-          onClick={() => setSelectedItem(item)}
-        />
-        <AiOutlineDelete size={20} className="cursor-pointer" />
-      </div>
+      <ItemActionIcons
+        itemName={item.name}
+        apiDeleteUrl={`/api/menu/food/${item.id}`}
+        onEdit={() => setSelectedItem(item)}
+      />
     </div>
   );
 };

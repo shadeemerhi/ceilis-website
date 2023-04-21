@@ -1,7 +1,6 @@
-import { FoodItem } from "@prisma/client";
+import { ICreateFoodItemInput } from "@/app/util/types";
 import prisma from "@/prisma/client";
 import { NextResponse } from "next/server";
-import { ICreateFoodItemInput } from "@/app/util/types";
 
 interface RouteParams {
   params: {
@@ -24,7 +23,26 @@ export async function PUT(req: Request, { params }: RouteParams) {
     return NextResponse.json({ item });
   } catch (error) {
     console.log(error);
-    return new NextResponse("Failed to create food item", {
+    return new NextResponse("Failed to update food item", {
+      status: 500,
+    });
+  }
+}
+
+export async function DELETE(req: Request, { params }: RouteParams) {
+  try {
+    const { id } = params;
+
+    const item = await prisma.foodItem.delete({
+      where: {
+        id,
+      },
+    });
+
+    return NextResponse.json({ item });
+  } catch (error) {
+    console.log(error);
+    return new NextResponse("Failed to delete food item", {
       status: 500,
     });
   }
