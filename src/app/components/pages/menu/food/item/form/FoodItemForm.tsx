@@ -1,46 +1,14 @@
 import Button from "@/app/components/design-system/Button";
 import Input from "@/app/components/design-system/Input";
-import Spinner from "@/app/components/design-system/Spinner";
+import useMenuItemForm from "@/app/hooks/useMenuItemForm";
 import { ICreateFoodItemInput } from "@/app/util/types";
 import { Addition, FoodItem as IFoodItem } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from "react-toastify";
-import AdditionInputs from "./AdditionInputs";
-
-const createFoodItem = async (input: ICreateFoodItemInput) => {
-  const response = await fetch("/api/menu/food", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(input),
-  });
-
-  if (!response.ok) {
-    throw new Error();
-  }
-
-  return response.json();
-};
-
-const updateFoodItem = async (input: IFoodItem) => {
-  const { id, ...rest } = input;
-  const response = await fetch(`/api/menu/food/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(rest),
-  });
-
-  if (!response.ok) {
-    throw new Error();
-  }
-
-  return response.json();
-};
+import AdditionInputs from "../../../common/AdditionInputs";
+import SizeInputs from "../../../common/SizeInputs";
+import SubmitButton from "../../../common/SubmitButton";
 
 interface IFoodItemFormProps {
   item: IFoodItem | ICreateFoodItemInput;
@@ -50,55 +18,24 @@ interface IFoodItemFormProps {
 }
 
 const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
-  const [foodItem, setFoodItem] = useState<IFoodItem | ICreateFoodItemInput>(
-    item
-  );
   const [addingAddition, setAddingAddition] = useState(false);
-  const [addingSize, setAddingSize] = useState(false);
-  const [size, setSize] = useState<Addition>({ name: "", price: 0 });
 
-  const [isPending, startTransition] = useTransition();
-  const [isFetching, setIsFetching] = useState(false);
-  const isMutating = isPending || isFetching;
-  const router = useRouter();
-
-  const onSubmit = async () => {
-    if (!foodItem.name) {
-      toast.error("Please enter a name for the item");
-      return;
-    }
-
-    const isUpdatingItem = !!foodItem.id;
-
-    setIsFetching(true);
-
-    try {
-      isUpdatingItem
-        ? await updateFoodItem(foodItem as IFoodItem)
-        : await createFoodItem(foodItem);
-
-      startTransition(() => {
-        router.refresh();
-      });
-
-      toast.success(
-        `Successfully ${isUpdatingItem ? "updated" : "created"} item`
-      );
-      setSelectedItem(null);
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to save item");
-    } finally {
-      setIsFetching(false);
-    }
-  };
+  const {
+    item: foodItem,
+    setItem,
+    onSubmit,
+    isMutating,
+  } = useMenuItemForm<IFoodItem | ICreateFoodItemInput>({
+    initState: item,
+    closeForm: () => setSelectedItem(null),
+  });
 
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = event;
 
-    setFoodItem((prev) => ({
+    setItem((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -111,7 +48,7 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
       target: { name, value },
     } = event;
 
-    setFoodItem((prev) => ({
+    setItem((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -122,50 +59,14 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
       currentTarget: { value },
     } = event;
 
-    setFoodItem((prev) => ({
+    setItem((prev) => ({
       ...prev,
       price: parseFloat(parseFloat(value).toFixed(2)),
     }));
   };
 
-  /**
-   * Sizes
-   */
-  const onSizeNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = event;
-
-    setSize((prev) => ({ ...prev, name: value }));
-  };
-
-  const onSizePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = event;
-
-    setSize((prev) => ({
-      ...prev,
-      price: parseFloat(parseFloat(value).toString()),
-    }));
-  };
-
-  const createSize = (size: Addition) => {
-    const existingSize = foodItem.sizes.find((s) => s.name === size.name);
-
-    if (existingSize) {
-      toast.error("Size with that name already exists");
-      return;
-    }
-
-    setFoodItem((prev) => ({
-      ...prev,
-      sizes: [...prev.sizes, size],
-    }));
-  };
-
   const deleteSize = (size: Addition) => {
-    setFoodItem((prev) => ({
+    setItem((prev) => ({
       ...prev,
       sizes: prev.sizes.filter((s) => s.name !== size.name),
     }));
@@ -184,14 +85,14 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
       return;
     }
 
-    setFoodItem((prev) => ({
+    setItem((prev) => ({
       ...prev,
       additions: [...prev.additions, addition],
     }));
   };
 
   const deleteAddition = (addition: Addition) => {
-    setFoodItem((prev) => ({
+    setItem((prev) => ({
       ...prev,
       additions: prev.additions.filter((a) => a.name !== addition.name),
     }));
@@ -220,6 +121,7 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
             value={foodItem.description || ""}
             onChange={onDescriptionChange}
             name="description"
+            placeholder="Description"
             className="
                 px-3 
                 py-1
@@ -280,20 +182,7 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
               </span>
             )}
           </div>
-          {addingSize ? (
-            <AdditionInputs
-              additionType="size"
-              createAddition={createSize}
-              cancel={() => setAddingSize(false)}
-            />
-          ) : (
-            <Button
-              text="Add Size"
-              textColor="black"
-              variant="border"
-              onClick={() => setAddingSize(true)}
-            />
-          )}
+          <SizeInputs item={foodItem} setItem={setItem} />
         </div>
         <div className="flex flex-col gap-4">
           <span className="font-semibold">Additions</span>
@@ -340,18 +229,12 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
           )}
         </div>
       </div>
-      <div className="flex justify-end">
-        {isMutating ? (
-          <Spinner size="w-10 h-10" color="text-amber-500" />
-        ) : (
-          <Button
-            text="Save Item"
-            textColor="white"
-            variant="fill"
-            onClick={onSubmit}
-          />
-        )}
-      </div>
+      <SubmitButton
+        item={foodItem}
+        onSubmit={onSubmit}
+        url="/api/menu/food"
+        isMutating={isMutating}
+      />
     </div>
   );
 };

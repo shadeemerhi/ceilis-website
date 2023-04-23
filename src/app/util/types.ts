@@ -31,6 +31,8 @@ export interface IFetchFoodMenuResponse {
 
 export type ICreateFoodItemInput = Omit<FoodItem, "id"> & { id?: string };
 
+export type ICreateBeerItemInput = Omit<BeerItem, "id"> & { id?: string };
+
 export interface IFetchDrinkMenuResponse {
   beerCategories: Array<IBeerCategoryPopulated>;
   wineCategories: Array<IWineCategoryPopulated>;

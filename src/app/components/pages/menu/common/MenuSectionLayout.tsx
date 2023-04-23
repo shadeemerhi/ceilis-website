@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-interface IMenuSectionProps {
+interface IMenuSectionLayoutProps {
   children: ReactNode;
 }
 
-const MenuSection = ({ children }: IMenuSectionProps) => {
+const MenuSectionLayout = ({ children }: IMenuSectionLayoutProps) => {
   return (
     <div className="flex flex-col gap-5 w-full md:w-5/6 my-10 px-4 md:px-0">
       {children}
@@ -12,4 +12,4 @@ const MenuSection = ({ children }: IMenuSectionProps) => {
   );
 };
 
-export default MenuSection;
+export default MenuSectionLayout;

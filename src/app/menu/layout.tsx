@@ -1,4 +1,4 @@
-import MenuSelect from "../components/pages/menu/MenuSelect";
+import MenuSelect from "../components/pages/menu/common/MenuSelect";
 
 export default function RootLayout({
   children,

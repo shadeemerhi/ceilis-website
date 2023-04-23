@@ -1,12 +1,13 @@
 "use client";
 
-import Button from "@/app/components/design-system/Button";
 import { ICreateFoodItemInput, IFoodCategoryPopulated } from "@/app/util/types";
-import MenuSection from "../MenuSection";
-import FoodItem from "./item/FootItem";
-import { useState } from "react";
 import { FoodItem as IFoodItem } from "@prisma/client";
+import { useState } from "react";
+import HeaderButtons from "./HeaderButtons";
+import FoodItem from "./item/FootItem";
 import FoodItemForm from "./item/form/FoodItemForm";
+import SectionItems from "../common/SectionItems";
+import MenuSectionLayout from "../common/MenuSectionLayout";
 
 interface IFoodSectionProps {
   category: IFoodCategoryPopulated;
@@ -28,31 +29,17 @@ const FoodSection = ({ category }: IFoodSectionProps) => {
   >(null);
 
   return (
-    <MenuSection>
+    <MenuSectionLayout>
       <div className="flex justify-between items-center">
         <span className="text-3xl text-amber-600 tracking-widest">
           {category.name.toUpperCase()}
         </span>
-        {selectedItem ? (
-          <Button
-            text="Cancel"
-            textColor="black"
-            variant="border"
-            onClick={() => setSelectedItem(null)}
-          />
-        ) : (
-          <Button
-            text="Add Item"
-            textColor="white"
-            variant="fill"
-            onClick={() =>
-              setSelectedItem({
-                ...FOOD_ITEM_TEMPLATE,
-                categoryId: category.id,
-              })
-            }
-          />
-        )}
+        <HeaderButtons<ICreateFoodItemInput>
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+          categoryId={category.id}
+          itemTemplate={FOOD_ITEM_TEMPLATE}
+        />
       </div>
       {category.description && <span>{category.description}</span>}
       {selectedItem ? (
@@ -60,9 +47,12 @@ const FoodSection = ({ category }: IFoodSectionProps) => {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {category.items.map((item) => (
-              <FoodItem item={item} setSelectedItem={setSelectedItem} />
-            ))}
+            <SectionItems<IFoodItem>
+              items={category.items}
+              renderItem={(item) => (
+                <FoodItem item={item} setSelectedItem={setSelectedItem} />
+              )}
+            />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {category.additions.length > 0 && (
@@ -98,7 +88,7 @@ const FoodSection = ({ category }: IFoodSectionProps) => {
           </div>
         </>
       )}
-    </MenuSection>
+    </MenuSectionLayout>
   );
 };
 

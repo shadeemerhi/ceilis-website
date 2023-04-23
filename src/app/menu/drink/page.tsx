@@ -1,9 +1,11 @@
-import BeerContent from "@/app/components/pages/menu/drink/BeerContent";
-import WineContent from "@/app/components/pages/menu/drink/WineContent";
+import WineContent from "@/app/components/pages/menu/drink/wine/WineContent";
+import BeerContent from "@/app/components/pages/menu/drink/beer/BeerContent";
 import { IFetchDrinkMenuResponse } from "@/app/util/types";
 
 const DrinkMenu = async () => {
-  const response = await fetch(`${process.env.BASE_URL}/api/menu/drink`);
+  const response = await fetch(`${process.env.BASE_URL}/api/menu/drink`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch drink menu");
