@@ -4,18 +4,10 @@ import Button from "@/app/components/design-system/Button";
 import Modal from "@/app/components/design-system/Modal";
 import Spinner from "@/app/components/design-system/Spinner";
 import { useModal } from "@/app/hooks/useModal";
-import { ICreateFoodItemInput } from "@/app/util/types";
-import { FoodItem } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useState, useTransition } from "react";
-import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { useState, useTransition } from "react";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { toast } from "react-toastify";
-
-const deleteItem = async (url: string) => {
-  const response = await fetch(url, {
-    method: "DELETE",
-  });
-};
 
 interface IItemActionProps {
   itemName: string;
@@ -37,7 +29,13 @@ const ItemActionIcons = ({
   const onDeleteItem = async () => {
     setIsFetching(true);
     try {
-      await deleteItem(apiDeleteUrl);
+      const response = await fetch(apiDeleteUrl, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error();
+      }
 
       startTransition(() => {
         router.refresh();

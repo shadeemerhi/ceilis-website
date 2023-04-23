@@ -1,7 +1,6 @@
 import Button from "@/app/components/design-system/Button";
 import Input from "@/app/components/design-system/Input";
 import useMenuItemForm from "@/app/hooks/useMenuItemForm";
-import { ICreateFoodItemInput } from "@/app/util/types";
 import { Addition, FoodItem as IFoodItem } from "@prisma/client";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -9,12 +8,11 @@ import { toast } from "react-toastify";
 import AdditionInputs from "../../../common/AdditionInputs";
 import SizeInputs from "../../../common/SizeInputs";
 import SubmitButton from "../../../common/SubmitButton";
+import { ICreateItemInput, ISelectedItem } from "@/app/util/types";
 
 interface IFoodItemFormProps {
-  item: IFoodItem | ICreateFoodItemInput;
-  setSelectedItem: Dispatch<
-    SetStateAction<IFoodItem | ICreateFoodItemInput | null>
-  >;
+  item: ICreateItemInput<IFoodItem>;
+  setSelectedItem: Dispatch<SetStateAction<ISelectedItem<IFoodItem>>>;
 }
 
 const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
@@ -25,7 +23,7 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
     setItem,
     onSubmit,
     isMutating,
-  } = useMenuItemForm<IFoodItem | ICreateFoodItemInput>({
+  } = useMenuItemForm<ICreateItemInput<IFoodItem>>({
     initState: item,
     closeForm: () => setSelectedItem(null),
   });

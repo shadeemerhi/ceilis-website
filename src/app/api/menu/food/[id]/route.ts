@@ -1,5 +1,6 @@
-import { ICreateFoodItemInput } from "@/app/util/types";
+import { ICreateItemInput } from "@/app/util/types";
 import prisma from "@/prisma/client";
+import { FoodItem } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 interface RouteParams {
@@ -10,7 +11,7 @@ interface RouteParams {
 
 export async function PUT(req: Request, { params }: RouteParams) {
   try {
-    const data = (await req.json()) as ICreateFoodItemInput;
+    const data = (await req.json()) as ICreateItemInput<FoodItem>;
     const { id } = params;
 
     const item = await prisma.foodItem.update({

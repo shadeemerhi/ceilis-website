@@ -1,13 +1,11 @@
 import { BeerItem as IBeerItem } from "@prisma/client";
 import ItemActionIcons from "../../food/item/ItemActionIcons";
-import { ICreateBeerItemInput } from "@/app/util/types";
 import { Dispatch, SetStateAction } from "react";
+import { ISelectedItem } from "@/app/util/types";
 
 interface IBeerItemProps {
   item: IBeerItem;
-  setSelectedItem: Dispatch<
-    SetStateAction<IBeerItem | ICreateBeerItemInput | null>
-  >;
+  setSelectedItem: Dispatch<SetStateAction<ISelectedItem<IBeerItem>>>;
 }
 
 const BeerItem = ({ item, setSelectedItem }: IBeerItemProps) => {

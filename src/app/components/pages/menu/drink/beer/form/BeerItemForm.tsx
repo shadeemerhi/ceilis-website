@@ -1,15 +1,13 @@
 import Input from "@/app/components/design-system/Input";
 import useMenuItemForm from "@/app/hooks/useMenuItemForm";
-import { ICreateBeerItemInput } from "@/app/util/types";
 import { BeerItem as IBeerItem } from "@prisma/client";
 import { Dispatch, SetStateAction } from "react";
 import SubmitButton from "../../../common/SubmitButton";
+import { ICreateItemInput, ISelectedItem } from "@/app/util/types";
 
 interface IBeerItemFormProps {
-  item: IBeerItem | ICreateBeerItemInput;
-  setSelectedItem: Dispatch<
-    SetStateAction<IBeerItem | ICreateBeerItemInput | null>
-  >;
+  item: ICreateItemInput<IBeerItem>;
+  setSelectedItem: Dispatch<SetStateAction<ISelectedItem<IBeerItem>>>;
 }
 
 const BeerItemForm = ({ item, setSelectedItem }: IBeerItemFormProps) => {
@@ -18,7 +16,7 @@ const BeerItemForm = ({ item, setSelectedItem }: IBeerItemFormProps) => {
     setItem,
     onSubmit,
     isMutating,
-  } = useMenuItemForm<IBeerItem | ICreateBeerItemInput>({
+  } = useMenuItemForm<ICreateItemInput<IBeerItem>>({
     initState: item,
     closeForm: () => setSelectedItem(null),
   });

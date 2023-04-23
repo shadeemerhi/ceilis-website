@@ -1,10 +1,14 @@
 "use client";
 
-import { ICreateFoodItemInput, IFoodCategoryPopulated } from "@/app/util/types";
+import {
+  ICreateItemInput,
+  IFoodCategoryPopulated,
+  ISelectedItem,
+} from "@/app/util/types";
 import { FoodItem as IFoodItem } from "@prisma/client";
 import { useState } from "react";
 import HeaderButtons from "./HeaderButtons";
-import FoodItem from "./item/FootItem";
+import FoodItem from "./item/FoodItem";
 import FoodItemForm from "./item/form/FoodItemForm";
 import SectionItems from "../common/SectionItems";
 import MenuSectionLayout from "../common/MenuSectionLayout";
@@ -13,7 +17,7 @@ interface IFoodSectionProps {
   category: IFoodCategoryPopulated;
 }
 
-const FOOD_ITEM_TEMPLATE: ICreateFoodItemInput = {
+const FOOD_ITEM_TEMPLATE: ICreateItemInput<IFoodItem> = {
   categoryId: "",
   name: "",
   description: "",
@@ -24,9 +28,8 @@ const FOOD_ITEM_TEMPLATE: ICreateFoodItemInput = {
 
 const FoodSection = ({ category }: IFoodSectionProps) => {
   const isAdmin = true;
-  const [selectedItem, setSelectedItem] = useState<
-    ICreateFoodItemInput | IFoodItem | null
-  >(null);
+  const [selectedItem, setSelectedItem] =
+    useState<ISelectedItem<IFoodItem>>(null);
 
   return (
     <MenuSectionLayout>
@@ -34,7 +37,7 @@ const FoodSection = ({ category }: IFoodSectionProps) => {
         <span className="text-3xl text-amber-600 tracking-widest">
           {category.name.toUpperCase()}
         </span>
-        <HeaderButtons<ICreateFoodItemInput>
+        <HeaderButtons<ICreateItemInput<IFoodItem>>
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
           categoryId={category.id}

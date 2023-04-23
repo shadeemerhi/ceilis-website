@@ -1,13 +1,11 @@
-import { ICreateFoodItemInput } from "@/app/util/types";
 import { FoodItem as IFoodItem } from "@prisma/client";
 import { Dispatch, SetStateAction } from "react";
 import ItemActionIcons from "./ItemActionIcons";
+import { ISelectedItem } from "@/app/util/types";
 
 interface IFoodItemProps {
   item: IFoodItem;
-  setSelectedItem: Dispatch<
-    SetStateAction<IFoodItem | ICreateFoodItemInput | null>
-  >;
+  setSelectedItem: Dispatch<SetStateAction<ISelectedItem<IFoodItem>>>;
 }
 
 const FoodItem = ({ item, setSelectedItem }: IFoodItemProps) => {

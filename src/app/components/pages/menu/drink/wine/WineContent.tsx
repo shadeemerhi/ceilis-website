@@ -1,3 +1,5 @@
+"use client";
+
 import { IFetchDrinkMenuResponse } from "@/app/util/types";
 import MenuSectionLayout from "../../common/MenuSectionLayout";
 import WineSection from "./WineSection";

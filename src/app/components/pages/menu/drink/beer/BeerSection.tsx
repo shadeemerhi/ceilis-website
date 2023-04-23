@@ -1,4 +1,8 @@
-import { IBeerCategoryPopulated, ICreateBeerItemInput } from "@/app/util/types";
+import {
+  IBeerCategoryPopulated,
+  ICreateItemInput,
+  ISelectedItem,
+} from "@/app/util/types";
 import HeaderButtons from "../../food/HeaderButtons";
 import { useState } from "react";
 import { BeerItem as IBeerItem } from "@prisma/client";
@@ -6,7 +10,7 @@ import BeerItem from "./BeerItem";
 import BeerItemForm from "./form/BeerItemForm";
 import SectionItems from "../../common/SectionItems";
 
-const BEER_ITEM_TEMPLATE: ICreateBeerItemInput = {
+const BEER_ITEM_TEMPLATE: ICreateItemInput<IBeerItem> = {
   categoryId: "",
   name: "",
   description: "",
@@ -21,9 +25,8 @@ interface IBeerSectionProps {
 }
 
 const BeerSection = ({ category }: IBeerSectionProps) => {
-  const [selectedItem, setSelectedItem] = useState<
-    IBeerItem | ICreateBeerItemInput | null
-  >(null);
+  const [selectedItem, setSelectedItem] =
+    useState<ISelectedItem<IBeerItem>>(null);
 
   return (
     <div className="flex flex-col gap-6 mb-8">
@@ -44,7 +47,7 @@ const BeerSection = ({ category }: IBeerSectionProps) => {
             <span>${category.price}</span>
           )}
         </div>
-        <HeaderButtons<ICreateBeerItemInput>
+        <HeaderButtons<ICreateItemInput<IBeerItem>>
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
           categoryId={category.id}
