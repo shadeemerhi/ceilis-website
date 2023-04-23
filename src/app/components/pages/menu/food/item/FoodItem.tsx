@@ -1,6 +1,6 @@
 import { FoodItem as IFoodItem } from "@prisma/client";
 import { Dispatch, SetStateAction } from "react";
-import ItemActionIcons from "./ItemActionIcons";
+import ItemActionIcons from "../../common/ItemActionIcons";
 import { ISelectedItem } from "@/app/util/types";
 
 interface IFoodItemProps {

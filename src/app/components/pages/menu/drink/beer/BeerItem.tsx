@@ -1,5 +1,5 @@
 import { BeerItem as IBeerItem } from "@prisma/client";
-import ItemActionIcons from "../../food/item/ItemActionIcons";
+import ItemActionIcons from "../../common/ItemActionIcons";
 import { Dispatch, SetStateAction } from "react";
 import { ISelectedItem } from "@/app/util/types";
 

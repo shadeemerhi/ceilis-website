@@ -1,14 +1,14 @@
 import Button from "@/app/components/design-system/Button";
 import Input from "@/app/components/design-system/Input";
 import useMenuItemForm from "@/app/hooks/useMenuItemForm";
+import { ICreateItemInput, ISelectedItem } from "@/app/util/types";
 import { Addition, FoodItem as IFoodItem } from "@prisma/client";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from "react-toastify";
 import AdditionInputs from "../../../common/AdditionInputs";
-import SizeInputs from "../../../common/SizeInputs";
 import SubmitButton from "../../../common/SubmitButton";
-import { ICreateItemInput, ISelectedItem } from "@/app/util/types";
+import ItemSizes from "../../../common/sizes/ItemSizes";
 
 interface IFoodItemFormProps {
   item: ICreateItemInput<IFoodItem>;
@@ -60,13 +60,6 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
     setItem((prev) => ({
       ...prev,
       price: parseFloat(parseFloat(value).toFixed(2)),
-    }));
-  };
-
-  const deleteSize = (size: Addition) => {
-    setItem((prev) => ({
-      ...prev,
-      sizes: prev.sizes.filter((s) => s.name !== size.name),
     }));
   };
 
@@ -148,39 +141,7 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
           </div>
         )}
         <div className="flex flex-col gap-4">
-          <span className="font-semibold">Sizes</span>
-          <div className="grid grid-cols-3 gap-4">
-            {foodItem.sizes.length ? (
-              <>
-                {foodItem.sizes.map((item) => (
-                  <div>
-                    <div className="flex justify-between">
-                      <label htmlFor={item.name}>{item.name}</label>
-                      <AiOutlineDelete
-                        size={20}
-                        className="cursor-pointer"
-                        onClick={() => deleteSize(item)}
-                      />
-                    </div>
-                    <Input
-                      id={item.name}
-                      name={item.name}
-                      onChange={() => {}}
-                      value={item.price?.toString()}
-                      placeholder="Size name"
-                    />
-                  </div>
-                ))}
-              </>
-            ) : (
-              <span>
-                This item currently does not have sizes, but instead has a
-                single price. If this item has multiple sizes with different
-                prices, you can add them here.
-              </span>
-            )}
-          </div>
-          <SizeInputs item={foodItem} setItem={setItem} />
+          <ItemSizes item={foodItem} setItem={setItem} />
         </div>
         <div className="flex flex-col gap-4">
           <span className="font-semibold">Additions</span>

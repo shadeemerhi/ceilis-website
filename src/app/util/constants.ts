@@ -30,3 +30,8 @@ export const TIME_OPTIONS = [
 ];
 
 export const GUEST_OPTIONS = [...Array(40)].map((_, i) => (i + 1).toString());
+
+/**
+ * Menu
+ */
+export const WINE_SIZE_OPTIONS = ["6oz", "9oz", "Bottle"];
