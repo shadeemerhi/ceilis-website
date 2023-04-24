@@ -71,7 +71,7 @@ const ItemSizes = <T,>({ item, setItem, sizeNameList }: IItemSizesProps<T>) => {
         {item.sizes.length ? (
           <>
             {item.sizes.map((item) => (
-              <div>
+              <div key={item.name}>
                 <div className="flex justify-between">
                   <label htmlFor={item.name}>{item.name}</label>
                   <AiOutlineDelete

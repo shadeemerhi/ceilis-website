@@ -11,7 +11,7 @@ const BeerContent = ({ beerCategories }: IBeerContentProps) => {
     <MenuSectionLayout>
       <span className="text-3xl text-amber-600 tracking-widest">BEER</span>
       {beerCategories.map((category) => (
-        <BeerSection category={category} />
+        <BeerSection key={category.id} category={category} />
       ))}
     </MenuSectionLayout>
   );

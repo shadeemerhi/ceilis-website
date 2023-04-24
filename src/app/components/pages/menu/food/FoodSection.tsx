@@ -63,7 +63,7 @@ const FoodSection = ({ category }: IFoodSectionProps) => {
                 <span className="font-bold text-lg">Additions</span>
                 <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-2 sm:gap-x-8">
                   {category.additions.map((addition) => (
-                    <div className="flex justify-between">
+                    <div key={addition.name} className="flex justify-between">
                       <span className="font-semibold">{addition.name}</span>
                       <span>${addition.price}</span>
                     </div>
@@ -79,7 +79,7 @@ const FoodSection = ({ category }: IFoodSectionProps) => {
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-2 sm:gap-x-8">
                     {category.substitutions.map((addition) => (
-                      <div className="flex justify-between">
+                      <div key={addition.name} className="flex justify-between">
                         <span className="font-light">{addition.name}</span>
                         <span>${addition.price}</span>
                       </div>

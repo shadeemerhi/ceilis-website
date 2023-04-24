@@ -11,7 +11,7 @@ const WineContent = ({ wineCategories }: IWineContentProps) => {
     <MenuSectionLayout>
       <span className="text-3xl text-amber-600 tracking-widest">WINE</span>
       {wineCategories.map((category) => (
-        <WineSection category={category} />
+        <WineSection key={category.id} category={category} />
       ))}
     </MenuSectionLayout>
   );

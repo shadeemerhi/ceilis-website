@@ -149,7 +149,7 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
             {foodItem.additions.length ? (
               <>
                 {foodItem.additions.map((item) => (
-                  <div>
+                  <div key={item.name}>
                     <div className="flex justify-between">
                       <label htmlFor={item.name}>{item.name}</label>
                       <AiOutlineDelete

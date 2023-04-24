@@ -9,7 +9,7 @@ const SpiritContent = ({ spiritCategories }: ISpiritContentProps) => {
     <MenuSectionLayout>
       <span className="text-3xl text-amber-600 tracking-widest">SPIRITS</span>
       {spiritCategories.map((category) => (
-        <SpiritSection category={category} />
+        <SpiritSection key={category.id} category={category} />
       ))}
     </MenuSectionLayout>
   );

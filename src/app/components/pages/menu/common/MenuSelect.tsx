@@ -30,7 +30,11 @@ const MenuSelect = () => {
     <div className="sticky w-full top-0 flex flex-col justify-end items-center h-36 bg-zinc-800">
       <div className="flex justify-between w-full md:w-5/6">
         {SELECTION_ITEMS.map((item) => (
-          <MenuSelectItem item={item} selected={item.pathname === pathname} />
+          <MenuSelectItem
+            key={item.pathname}
+            item={item}
+            selected={item.pathname === pathname}
+          />
         ))}
       </div>
     </div>

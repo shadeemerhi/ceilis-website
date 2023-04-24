@@ -23,7 +23,7 @@ const WineItem = ({ item, setSelectedItem }: IWineItemProps) => {
       </div>
       <div className="flex justify-between text-sm sm:text-base text-right w-40 sm:w-56">
         {WINE_SIZE_OPTIONS.map((option) => (
-          <span className="w-1/3">
+          <span key={option} className="w-1/3">
             {item.sizes.find((size) => size.name === option)?.price || null}
           </span>
         ))}

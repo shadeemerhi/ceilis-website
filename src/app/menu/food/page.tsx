@@ -15,7 +15,7 @@ const FoodMenu = async () => {
   return (
     <div className="flex flex-col items-center">
       {data.categories.map((category) => (
-        <FoodSection category={category} />
+        <FoodSection key={category.id} category={category} />
       ))}
     </div>
   );

@@ -16,7 +16,7 @@ const FoodItem = ({ item, setSelectedItem }: IFoodItemProps) => {
         {item.sizes.length > 0 ? (
           <div className="flex flex-col mb-1">
             {item.sizes.map((size) => (
-              <div className="text-right">
+              <div key={size.name} className="text-right">
                 <span className="font-semibold">
                   {size.name} <span className="font-normal">${size.price}</span>
                 </span>

@@ -46,7 +46,9 @@ const WineSection = ({ category }: IWineSectionProps) => {
           </div>
           <div className="flex font-bold text-right text-sm sm:text-base w-40 sm:w-56">
             {WINE_SIZE_OPTIONS.map((size) => (
-              <span className="w-1/3">{size}</span>
+              <span key={size} className="w-1/3">
+                {size}
+              </span>
             ))}
           </div>
         </div>

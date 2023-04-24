@@ -38,7 +38,7 @@ const BeerSection = ({ category }: IBeerSectionProps) => {
           {category.sizes.length > 0 ? (
             <div className="flex gap-3">
               {category.sizes.map((size) => (
-                <span className="font-bold">
+                <span key={size.name} className="font-bold">
                   {size.name} <span className="font-normal">${size.price}</span>
                 </span>
               ))}
