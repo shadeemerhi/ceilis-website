@@ -75,6 +75,7 @@ model SpiritItem {
   name        String
   price       Float
   description String?
+  sizes       Addition[]
   categoryId  String         @db.ObjectId
   category    SpiritCategory @relation(fields: [categoryId], references: [id])
 }

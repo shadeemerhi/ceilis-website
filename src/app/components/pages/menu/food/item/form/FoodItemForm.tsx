@@ -94,7 +94,7 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
       <span className="text-xl">
         {item.id ? `Editing Item: ${item.name}` : "Creating Item"}
       </span>
-      <div className="grid grid-cols-1 gap-12 mt-6">
+      <div className="grid grid-cols-2 gap-12 mt-6">
         <div className="flex flex-col gap-1">
           <label htmlFor="name">Name</label>
           <Input
@@ -105,7 +105,22 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
             placeholder="Name"
           />
         </div>
-        <div className="flex flex-col gap-1">
+        {foodItem.sizes.length === 0 && (
+          <div className="flex flex-col gap-1">
+            <label htmlFor="price">Price</label>
+            <Input
+              id="price"
+              name="price"
+              onChange={onPriceChange}
+              value={foodItem.price.toString()}
+              step="0.01"
+              min="0"
+              placeholder="Price"
+              type="number"
+            />
+          </div>
+        )}
+        <div className="col-span-2 flex flex-col gap-1">
           <label htmlFor="description">Description</label>
           <textarea
             rows={3}
@@ -125,25 +140,10 @@ const FoodItemForm = ({ item, setSelectedItem }: IFoodItemFormProps) => {
                 placeholder:text-zinc-500"
           />
         </div>
-        {foodItem.sizes.length === 0 && (
-          <div className="flex flex-col gap-1">
-            <label htmlFor="price">Price</label>
-            <Input
-              id="price"
-              name="price"
-              onChange={onPriceChange}
-              value={foodItem.price.toString()}
-              step="0.01"
-              min="0"
-              placeholder="Price"
-              type="number"
-            />
-          </div>
-        )}
-        <div className="flex flex-col gap-4">
+        <div className="col-span-2 flex flex-col gap-4">
           <ItemSizes item={foodItem} setItem={setItem} />
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="col-span-2 flex flex-col gap-4">
           <span className="font-semibold">Additions</span>
           <div className="grid grid-cols-3 gap-4">
             {foodItem.additions.length ? (

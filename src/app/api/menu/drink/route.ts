@@ -14,10 +14,18 @@ export async function GET() {
         items: true,
       },
     });
-    // const wines = [];
-    // const spirits = [];
 
-    return NextResponse.json({ beerCategories, wineCategories });
+    const spiritCategories = await prisma.spiritCategory.findMany({
+      include: {
+        items: true,
+      },
+    });
+
+    return NextResponse.json({
+      beerCategories,
+      wineCategories,
+      spiritCategories,
+    });
   } catch (error) {
     console.log(error);
     return new NextResponse("Failed to fetch drink items", {
