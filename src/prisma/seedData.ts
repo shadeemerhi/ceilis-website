@@ -9,6 +9,8 @@
 //   WineItem,
 // } from "@prisma/client";
 
+export {};
+
 // /**
 //  * FOOD
 //  */
