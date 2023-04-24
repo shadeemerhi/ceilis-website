@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "postinstall": "prisma generate --schema=src/prisma/schema.prisma",
-    "vercel-build": "prisma generate --schema=src/prisma/schema.prisma",
+    "vercel-build": "prisma generate --schema=src/prisma/schema.prisma && next build",
     "prisma:generate": "prisma generate --schema=src/prisma/schema.prisma",
     "build": "next build",
     "start": "next start",
