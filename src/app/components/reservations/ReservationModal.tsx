@@ -1,14 +1,15 @@
 "use client";
 
 import { useReservationModal } from "@/app/hooks/useReservationModal";
-import { GUEST_OPTIONS, TIME_OPTIONS } from "@/app/util/constants";
+import { TIME_OPTIONS } from "@/app/util/constants";
+import { ICreateReservationInput } from "@/app/util/types";
 import React, { useState } from "react";
 import Button from "../design-system/Button";
 import Modal from "../design-system/Modal";
-import ReservationDetails from "./ReservationDetails";
-import ContactInformation from "./ContactInformation";
-import ReviewAndSubmit from "./ReviewAndSubmit";
 import Spinner from "../design-system/Spinner";
+import ContactInformation from "./ContactInformation";
+import ReservationDetails from "./ReservationDetails";
+import ReviewAndSubmit from "./ReviewAndSubmit";
 import Stepper from "./Stepper";
 import Success from "./Success";
 
@@ -24,15 +25,6 @@ const RESERVATION_TYPES = [
   "Other",
 ];
 
-export interface IReservation {
-  date: string | null;
-  time: string;
-  guests: string;
-  name: string;
-  email: string;
-  phone: string;
-}
-
 export interface IReservationFormErrors {
   date: string;
   name: string;
@@ -44,13 +36,14 @@ const ReservationModal = () => {
   const { modalOpen, closeReservationModal } = useReservationModal();
   const [step, setStep] = useState(1);
 
-  const [reservation, setReservation] = useState<IReservation>({
-    date: null,
+  const [reservation, setReservation] = useState<ICreateReservationInput>({
+    date: "",
     time: TIME_OPTIONS[0],
-    guests: GUEST_OPTIONS[1],
+    numberOfGuests: "0",
     email: "",
     name: "",
     phone: "",
+    status: "PENDING",
   });
 
   const [errors, setErrors] = useState<IReservationFormErrors>({

@@ -7,6 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Reservation {
+  id             String            @id @default(auto()) @map("_id") @db.ObjectId
+  date           String
+  time           String
+  name           String
+  email          String
+  phone          String
+  numberOfGuests String
+  status         ReservationStatus
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  DECLINED
+}
+
 model FoodItem {
   id          String       @id @default(auto()) @map("_id") @db.ObjectId
   name        String

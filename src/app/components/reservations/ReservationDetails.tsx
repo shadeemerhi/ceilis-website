@@ -1,13 +1,14 @@
+import { GUEST_OPTIONS, TIME_OPTIONS } from "@/app/util/constants";
+import { ICreateReservationInput } from "@/app/util/types";
 import { Listbox, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import { HiChevronUpDown } from "react-icons/hi2";
-import { IReservation, IReservationFormErrors } from "./ReservationModal";
-import { GUEST_OPTIONS, TIME_OPTIONS } from "@/app/util/constants";
 import Input from "../design-system/Input";
+import { IReservationFormErrors } from "./ReservationModal";
 
 interface IReservationDetailsProps {
-  reservation: IReservation;
+  reservation: ICreateReservationInput;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSelectChange: (name: string, value: string) => void;
   errors: IReservationFormErrors;
@@ -94,12 +95,16 @@ const ReservationDetails = ({
           Number of Guests
         </label>
         <Listbox
-          value={reservation.guests}
-          onChange={(value) => handleSelectChange("guests", value)}
+          value={reservation.numberOfGuests}
+          onChange={(value) =>
+            handleSelectChange("numberOfGuests", value.toString())
+          }
         >
           <div className="relative mt-1">
             <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300">
-              <span className="block truncate">{reservation.guests}</span>
+              <span className="block truncate">
+                {reservation.numberOfGuests}
+              </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <HiChevronUpDown size={24} />
               </span>

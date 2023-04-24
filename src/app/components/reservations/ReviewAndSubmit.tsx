@@ -1,8 +1,8 @@
+import { ICreateReservationInput } from "@/app/util/types";
 import { format } from "date-fns";
-import { IReservation } from "./ReservationModal";
 
 interface IReviewAndSubmitProps {
-  reservation: IReservation;
+  reservation: ICreateReservationInput;
 }
 
 const ReviewAndSubmit = ({ reservation }: IReviewAndSubmitProps) => {
