@@ -7,14 +7,11 @@ import prisma from "@/prisma/client";
 
 export async function GET(req: Request) {}
 
-const SENDGRID_API_KEY =
-  "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";
-
 export async function POST(req: Request) {
   try {
     const data = (await req.json()) as ICreateReservationInput;
 
-    sgMail.setApiKey(SENDGRID_API_KEY);
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
 
     const reservation = await prisma.reservation.create({
       data,
