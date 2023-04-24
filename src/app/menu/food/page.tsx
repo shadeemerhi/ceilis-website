@@ -6,6 +6,8 @@ const FoodMenu = async () => {
     cache: "no-store",
   });
 
+  console.log("HERE IS URL", process.env.BASE_URL);
+
   if (!response.ok) {
     throw new Error("Failed to fetch food menu");
   }
