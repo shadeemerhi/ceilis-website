@@ -1,9 +1,9 @@
-import { Formik, FormikHelpers } from "formik";
+import { ICreateReservationInput } from "@/app/util/types";
 import Input from "../design-system/Input";
-import { IReservation, IReservationFormErrors } from "./ReservationModal";
+import { IReservationFormErrors } from "./ReservationModal";
 
 interface IContactInformationProps {
-  reservation: IReservation;
+  reservation: ICreateReservationInput;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   errors: IReservationFormErrors;
 }
