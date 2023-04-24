@@ -4,12 +4,9 @@ import { IFetchDrinkMenuResponse } from "@/app/util/types";
 import SpiritContent from "@/app/components/pages/menu/drink/spirit/SpiritContent";
 
 const DrinkMenu = async () => {
-  const response = await fetch(
-    `https://ceilis-website.vercel.app/api/menu/drink`,
-    {
-      cache: "no-store",
-    }
-  );
+  const response = await fetch(`${process.env.BASE_URL}/api/menu/drink`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch drink menu");
