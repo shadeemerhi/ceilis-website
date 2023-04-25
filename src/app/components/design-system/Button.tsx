@@ -1,11 +1,11 @@
 import { HTMLProps } from "react";
 
-export type ButtonVariant = "default" | "border" | "fill";
+export type ButtonVariant = "default" | "border" | "fill" | "danger";
 export type ButtonTextColor = "white" | "black";
 
 interface IButtonProps extends HTMLProps<HTMLButtonElement> {
   text: string;
-  textColor?: ButtonTextColor;
+  textColor?: string;
   variant?: ButtonVariant;
   type?: "button" | "submit";
 }
@@ -23,11 +23,8 @@ const Button = (props: IButtonProps) => {
   );
 };
 
-const getButtonClasses = (
-  variant: ButtonVariant,
-  textColor: ButtonTextColor
-) => {
-  const baseClasses = `w-full h-12 rounded-sm max-w-[200px] tracking-widest hover-transition ${
+const getButtonClasses = (variant: ButtonVariant, textColor: string) => {
+  const baseClasses = `w-full h-12 rounded-sm max-w-[200px] tracking-widest hover-transition disabled:bg-zinc-300 disabled:text-white disabled:border-none ${
     textColor && `text-${textColor}`
   }`;
 
@@ -39,6 +36,10 @@ const getButtonClasses = (
 
   if (variant === "fill") {
     return baseClasses + " px-4 bg-amber-500 hover:bg-amber-400";
+  }
+
+  if (variant === "danger") {
+    return baseClasses + " px-4 border border-red-500";
   }
 
   return baseClasses;

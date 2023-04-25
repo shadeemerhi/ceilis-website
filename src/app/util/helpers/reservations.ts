@@ -2,6 +2,13 @@ import { ICreateReservationInput } from "../types";
 import { sendNewReservationEmailToAdmins } from "./email";
 import prisma from "@/prisma/client";
 
+export const getReservations = async () => {
+  /**
+   * Can add pagination and other optimizations later
+   */
+  return await prisma.reservation.findMany({});
+};
+
 export const handleNewReservation = async (input: ICreateReservationInput) => {
   /**
    * Create reservation

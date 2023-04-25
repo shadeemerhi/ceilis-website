@@ -75,6 +75,7 @@ model Reservation {
 enum ReservationStatus {
   PENDING
   CONFIRMED
+  CANCELLED
   DECLINED
 }
 
