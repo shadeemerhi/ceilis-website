@@ -7,7 +7,7 @@ import ActionButtons from "./ActionButtons";
 
 const Navbar = () => {
   return (
-    <div className="flex fixed w-full z-10 justify-between p-6 bg-zinc-800 font-light">
+    <div className="flex sticky top-0 w-full z-10 justify-between px-6 bg-zinc-800 font-light h-24">
       <Image
         src="/vercel.svg"
         alt="Vercel Logo"

@@ -1,12 +1,12 @@
 import MenuSelect from "../components/pages/menu/common/MenuSelect";
 
-export default function RootLayout({
+export default function MenuLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <section className="relative pt-24">
+    <section className="relative">
       <MenuSelect />
       {children}
     </section>
