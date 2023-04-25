@@ -1,1 +1,23 @@
-export async function GET(req: Request) {}
+import { getSearchedReservations } from "@/app/util/helpers/reservations";
+import { NextResponse } from "next/server";
+
+export async function GET(req: Request) {
+  try {
+    const { url } = req;
+
+    const queryString = url.split("/search")[1];
+
+    const params = new URLSearchParams(queryString);
+
+    const query = params.get("q");
+
+    const reservations = await getSearchedReservations(query);
+
+    return NextResponse.json({ reservations });
+  } catch (error) {
+    console.log(error);
+    return new NextResponse("Failed to fetch reservations", {
+      status: 500,
+    });
+  }
+}

@@ -11,24 +11,24 @@ const useReservation = () => {
   const isMutating = isPending || isFetching;
   const router = useRouter();
 
-  const getReservations = async () => {
-    try {
-      const response = await fetch("/api/reservations");
+  //   const getReservations = async () => {
+  //     try {
+  //       const response = await fetch("/api/reservations");
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch reservations");
-      }
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch reservations");
+  //       }
 
-      const data = (await response.json()) as IGetReservationsResponse;
+  //       const data = (await response.json()) as IGetReservationsResponse;
 
-      const { reservations } = data;
+  //       const { reservations } = data;
 
-      return reservations;
-    } catch (error) {
-      console.log("getReservations error", error);
-      throw error;
-    }
-  };
+  //       return reservations;
+  //     } catch (error) {
+  //       console.log("getReservations error", error);
+  //       throw error;
+  //     }
+  //   };
 
   const getReservation = async (id: string) => {};
 
@@ -37,7 +37,7 @@ const useReservation = () => {
   const deleteReservation = async (id: string) => {};
 
   return {
-    getReservations,
+    // getReservations,
     getReservation,
     updateReservation,
     deleteReservation,
