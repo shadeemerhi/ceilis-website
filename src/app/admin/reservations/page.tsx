@@ -1,11 +1,10 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
+import { getCurrentUser } from "@/app/util/helpers/users";
 import { redirect } from "next/navigation";
 
 const ReservationsPage = async () => {
-  const session = await getServerSession(authOptions);
+  const user = await getCurrentUser();
 
-  if (!session) {
+  if (!user) {
     redirect("/admin/login");
   }
 

@@ -1,10 +1,12 @@
-import { FcGoogle } from "react-icons/fc";
-import { signIn } from "next-auth/react";
-import { getCurrentUser } from "@/app/util/helpers/users";
-import { redirect } from "next/navigation";
+"use client";
 
-const LoginPage = async () => {
-  const user = await getCurrentUser();
+import { useCurrentUser } from "@/app/hooks/useCurrentUser";
+import { signIn } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
+
+const LoginPage = () => {
+  const { user } = useCurrentUser();
 
   if (user) {
     redirect("/admin/reservations");
