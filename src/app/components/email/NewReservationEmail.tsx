@@ -24,16 +24,15 @@ const NewReservationEmail = ({ reservation }: INewReservationEmail) => {
   return (
     <Html>
       <Head />
-      <Preview>New Reservation {reservation.id as string}</Preview>
+      <Preview>New Reservation from {reservation.name}</Preview>
       <Tailwind>
         <Body className="bg-white font-sans">
           <Container className="rounded-lg py-8 text-center">
             <Section className="border border-solid border-[#eaeaea] rounded-md p-10">
               <Img
-                src={`https://ceilis-website.vercel.app/vercel.svg`}
-                width="49"
-                height="21"
-                alt="Stripe"
+                src={`https://ceilisroyaloak.com/wp-content/uploads/2020/05/cropped-ceilislogositeheader.png`}
+                className="h-10 w-auto"
+                alt="Ceilis"
               />
               <Hr className="border-[0.5px] border-solid border-zinc-200 my-4" />
               <Heading className="text-zinc-800">Reservation Details</Heading>
