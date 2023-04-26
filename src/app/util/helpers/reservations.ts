@@ -4,6 +4,7 @@ import {
   sendReservationConfirmationEmailToCustomer,
 } from "./email";
 import prisma from "@/prisma/client";
+import { v4 } from "uuid";
 
 export const getSearchedReservations = async (query: string | null) => {
   return await prisma.reservation.findMany({
@@ -107,7 +108,19 @@ export const handleReservationConfirmation = async (id: string) => {
       `Successfully marked Reservation ${updatedReservation.id} CONFIRMED`
     );
 
-    await sendReservationConfirmationEmailToCustomer(updatedReservation);
+    /**
+     * Generate cancellation token
+     */
+    const token = v4();
+
+    await sendReservationConfirmationEmailToCustomer({
+      reservation: updatedReservation,
+      token,
+    });
+
+    console.log(
+      `Successfully sent Reservation ${reservation.id} confirmation email to ${reservation.email}`
+    );
 
     return updatedReservation;
   } catch (error) {

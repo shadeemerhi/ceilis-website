@@ -4,7 +4,6 @@ import {
   Button,
   Container,
   Head,
-  Heading,
   Hr,
   Html,
   Img,
@@ -17,15 +16,17 @@ import ReservationContent from "./ReservationContent";
 
 interface IReservationConfirmedProps {
   reservation: Reservation;
+  token: string;
 }
 
 const ReservationConfirmedEmail = ({
   reservation,
+  token,
 }: IReservationConfirmedProps) => {
   return (
     <Html>
       <Head />
-      <Preview>Reservation Confirmed!</Preview>
+      <Preview>Reservation Confirmed</Preview>
       <Tailwind>
         <Body className="bg-white font-sans">
           <Container className="rounded-lg py-8 text-center">
@@ -36,19 +37,22 @@ const ReservationConfirmedEmail = ({
                 alt="Ceilis"
               />
               <Hr className="border-[0.5px] border-solid border-zinc-200 my-4" />
-              <Text>Your reservation has been confirmed!</Text>
-              <Heading className="text-zinc-800">Reservation Details</Heading>
-              <ReservationContent reservation={reservation} />
-              <Text>
-                Plans changed? Please let us know by cancelling your reservation
-                below
+              <Text className="text-2xl">
+                Your reservation has been confirmed!
+              </Text>
+              <Container className="mb-6">
+                <ReservationContent reservation={reservation} />
+              </Container>
+              <Text className="text-lg">
+                Change of plans? Please let us know by cancelling your
+                reservation below
               </Text>
               <Section className="text-center">
                 <Button
                   pX={20}
                   pY={12}
-                  className="rounded text-red-500 border border-red-500 font-semibold no-underline text-center text-lg"
-                  href={`http://localhost:3000/admin/reservations/${reservation.id}`}
+                  className="rounded text-red-500 border border-solid border-[#ef4444] font-semibold no-underline text-center text-lg"
+                  href={`${process.env.BASE_URL}/admin/reservations/${reservation.id}/cancel/${token}`}
                   target="_blank"
                 >
                   Cancel Reservation

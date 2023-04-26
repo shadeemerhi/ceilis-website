@@ -3,6 +3,7 @@ import { Reservation } from "@prisma/client";
 import { render } from "@react-email/render";
 import sgMail from "@sendgrid/mail";
 import { getManagerEmails } from "./users";
+import ReservationConfirmedEmail from "@/app/components/email/ReservationConfirmedEmail";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
 
@@ -31,16 +32,28 @@ export const sendNewReservationEmailToAdmins = async (
   return await sgMail.send(options);
 };
 
-export const sendReservationConfirmationEmailToCustomer = async (
-  reservation: Reservation
-) => {
-  /**
-   * @todo
-   * Send email
-   */
-  await new Promise((r) => setTimeout(r, 2000));
+export const sendReservationConfirmationEmailToCustomer = async ({
+  reservation,
+  token,
+}: {
+  reservation: Reservation;
+  token: string;
+}) => {
+  const { email } = reservation;
 
-  console.log(
-    `Successfully sent Reservation ${reservation.id} confirmation email to ${reservation.email}`
-  );
+  const html = render(ReservationConfirmedEmail({ reservation, token }));
+
+  const options = {
+    to: email,
+    from: "shadmerhi@gmail.com", // will be Ceili's email
+    subject: "Ceili's Royal Oak Reservation",
+    html,
+  };
+
+  try {
+    return await sgMail.send(options);
+  } catch (error) {
+    console.log("sendReservationConfirmationEmailToCustomer error", error);
+    throw error;
+  }
 };

@@ -33,7 +33,6 @@ const NewReservationEmail = ({ reservation }: INewReservationEmail) => {
                 alt="Ceilis"
               />
               <Hr className="border-[0.5px] border-solid border-zinc-200 my-4" />
-              <Heading className="text-zinc-800">Reservation Details</Heading>
               <ReservationContent reservation={reservation} />
               <Section className="text-center">
                 <Button
