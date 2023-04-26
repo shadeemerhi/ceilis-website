@@ -17,7 +17,11 @@ const ReservationsWrapper = () => {
       ) : (
         <>
           {reservations.map((reservation) => (
-            <ReservationItem reservation={reservation} mutate={mutate} />
+            <ReservationItem
+              key={reservation.id}
+              reservation={reservation}
+              mutate={mutate}
+            />
           ))}
         </>
       )}
