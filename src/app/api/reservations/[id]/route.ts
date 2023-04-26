@@ -1,4 +1,7 @@
-import { getReservation } from "@/app/util/helpers/reservations";
+import {
+  getReservation,
+  isValidReservationToken,
+} from "@/app/util/helpers/reservations";
 import { userIsManager } from "@/app/util/helpers/userIsManager";
 import { getCurrentUser } from "@/app/util/helpers/users";
 import { NextResponse } from "next/server";
@@ -11,20 +14,17 @@ interface RouteParams {
 
 export async function GET(req: Request, { params }: RouteParams) {
   try {
+    const { id } = params;
     const user = await getCurrentUser();
-    const token = req.headers.get("authentication")?.split("Bearer ")[1];
+    const token = req.headers.get("authorization")?.split("Bearer ")[1];
 
-    const hasPermission = (user && userIsManager(user)) || token;
+    const hasPermission =
+      (user && userIsManager(user)) ||
+      (token && (await isValidReservationToken(id, token)));
 
-    /**
-     * @todo
-     * Validate token
-     */
     if (!hasPermission) {
       return new NextResponse("Not authorized");
     }
-
-    const { id } = params;
 
     const reservation = await getReservation(id);
 

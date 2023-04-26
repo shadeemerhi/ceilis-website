@@ -29,7 +29,7 @@ export const confirmReservation = async (id: string) => {
 const getReservation = async (args: Array<string>) => {
   const response = await fetch(args[0], {
     headers: {
-      Authentication: `Bearer ${args[1]}`,
+      Authorization: `Bearer ${args[1]}`,
     },
   });
 

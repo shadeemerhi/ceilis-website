@@ -4,6 +4,7 @@ import { KeyedMutator } from "swr";
 import { toast } from "react-toastify";
 import Spinner from "@/app/components/design-system/Spinner";
 import Button from "@/app/components/design-system/Button";
+import { useRouter } from "next/navigation";
 
 const cancelReservation = async ({
   id,
@@ -39,6 +40,7 @@ const CancelButton = <MR,>({
   mutate,
 }: ICancelButtonProps<MR>) => {
   const [isMutating, setIsMutating] = useState(false);
+  const router = useRouter();
 
   const onCancelReservation = async () => {
     setIsMutating(true);
@@ -48,6 +50,7 @@ const CancelButton = <MR,>({
       mutate();
 
       toast.success("Your reservation has been cancelled");
+      router.replace("/");
     } catch (error) {
       console.log("handleConfirmReservation error", error);
       toast.error("Something went wrong on our end. Please try again later");
