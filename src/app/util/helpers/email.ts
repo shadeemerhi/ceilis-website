@@ -4,14 +4,16 @@ import { render } from "@react-email/render";
 import sgMail from "@sendgrid/mail";
 import { getManagerEmails } from "./users";
 import ReservationConfirmedEmail from "@/app/components/email/ReservationConfirmedEmail";
+import ReservationCancelledEmail from "@/app/components/email/ReservationCancelledEmail";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+
+const SENDGRID_EMAIL = "shadeetesting2@gmail.com";
 
 export const sendNewReservationEmailToAdmins = async (
   reservation: Reservation
 ) => {
-  // const adminEmails = await getManagerEmails();
-  const adminEmails = ["shadeetesting1@gmail.com"];
+  const managerEmails = await getManagerEmails();
 
   const html = render(
     NewReservationEmail({
@@ -20,8 +22,8 @@ export const sendNewReservationEmailToAdmins = async (
   );
 
   const options = {
-    to: adminEmails,
-    from: "shadmerhi@gmail.com", // must be verified Single Sender email address
+    to: managerEmails,
+    from: SENDGRID_EMAIL, // must be verified Single Sender email address
     subject: "New Reservation",
     html,
   };
@@ -45,7 +47,7 @@ export const sendReservationConfirmationEmailToCustomer = async ({
 
   const options = {
     to: email,
-    from: "shadmerhi@gmail.com", // will be Ceili's email
+    from: SENDGRID_EMAIL, // will be Ceili's email
     subject: "Ceili's Royal Oak Reservation",
     html,
   };
@@ -62,8 +64,25 @@ export const sendReservationCancellationEmailToManagers = async (
   reservation: Reservation
 ) => {
   try {
-    // const managerEmails = await getManagerEmails();
-    await new Promise((r) => setTimeout(r, 2000));
+    const managerEmails = await getManagerEmails();
+
+    const html = render(
+      ReservationCancelledEmail({
+        reservation,
+      })
+    );
+
+    const options = {
+      to: managerEmails,
+      from: "shadmerhi@gmail.com", // must be verified Single Sender email address
+      subject: "New Reservation",
+      html,
+    };
+
+    /**
+     * Send email
+     */
+    return await sgMail.send(options);
   } catch (error) {
     console.log("sendReservationCancellationEmailToManagers", error);
     throw error;

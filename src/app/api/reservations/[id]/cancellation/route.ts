@@ -1,7 +1,4 @@
-import {
-  handleReservationCancellation,
-  handleReservationConfirmation,
-} from "@/app/util/helpers/reservations";
+import { handleReservationCancellation } from "@/app/util/helpers/reservations";
 import { NextResponse } from "next/server";
 
 interface RouteParams {

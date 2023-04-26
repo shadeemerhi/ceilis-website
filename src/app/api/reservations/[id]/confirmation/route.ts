@@ -1,5 +1,6 @@
 import { handleReservationConfirmation } from "@/app/util/helpers/reservations";
-import { getCurrentUser, userIsManager } from "@/app/util/helpers/users";
+import { userIsManager } from "@/app/util/helpers/userIsManager";
+import { getCurrentUser } from "@/app/util/helpers/users";
 import { NextResponse } from "next/server";
 
 interface RouteParams {
