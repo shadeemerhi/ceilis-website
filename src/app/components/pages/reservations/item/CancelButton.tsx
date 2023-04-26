@@ -43,8 +43,6 @@ const CancelButton = <MR,>({
   const onCancelReservation = async () => {
     setIsMutating(true);
     try {
-      console.log("here is token", token);
-
       await cancelReservation({ id: reservation.id, token });
 
       mutate();
