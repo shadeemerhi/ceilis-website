@@ -1,4 +1,7 @@
-import { handleReservationCancellation } from "@/app/util/helpers/reservations";
+import {
+  handleReservationCancellation,
+  isValidReservationToken,
+} from "@/app/util/helpers/reservations";
 import { NextResponse } from "next/server";
 
 interface RouteParams {
@@ -10,14 +13,13 @@ interface RouteParams {
 export async function POST(req: Request, { params }: RouteParams) {
   try {
     const { token } = (await req.json()) as { token: string };
+    const { id } = params;
 
-    if (!token) {
-      return new NextResponse("No token provided", {
+    if (!(await isValidReservationToken(id, token))) {
+      return new NextResponse("Invalid token", {
         status: 401,
       });
     }
-
-    const { id } = params;
 
     const reservation = await handleReservationCancellation({ id, token });
 

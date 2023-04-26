@@ -1,6 +1,6 @@
+import NotAuthorized from "@/app/components/common/NotAuthorized";
 import ReservationWrapper from "@/app/components/pages/reservations/ReservationWrapper";
-import { getCurrentUser } from "@/app/util/helpers/users";
-import { redirect } from "next/navigation";
+import { redis } from "@/redis/client";
 
 interface IReservationPageParams {
   params: {
@@ -16,6 +16,11 @@ const ReservationPage = async ({
    * @todo
    * Validate token
    */
+  const reservationId = await redis.get(token);
+
+  if (!reservationId) {
+    return <NotAuthorized />;
+  }
 
   return (
     <div className="flex flex-col items-center">

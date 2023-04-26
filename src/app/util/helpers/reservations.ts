@@ -1,3 +1,4 @@
+import { redis } from "@/redis/client";
 import { ICreateReservationInput } from "../types";
 import {
   sendNewReservationEmailToAdmins,
@@ -110,9 +111,10 @@ export const handleReservationConfirmation = async (id: string) => {
     );
 
     /**
-     * Generate cancellation token
+     * Generate cancellation token and store in Redis
      */
     const token = v4();
+    await redis.set(token, updatedReservation.id);
 
     await sendReservationConfirmationEmailToCustomer({
       reservation: updatedReservation,
@@ -174,8 +176,9 @@ export const handleReservationCancellation = async ({
     });
 
     /**
-     * Delete token
+     * Delete token store from Redis
      */
+    await redis.del(token);
 
     /**
      * Send email to managers
@@ -191,4 +194,21 @@ export const handleReservationCancellation = async ({
     console.log("handleReservationCancellation error", error);
     throw error;
   }
+};
+
+export const isValidReservationToken = async (
+  reservationId: string,
+  token: string
+) => {
+  if (!token) {
+    return false;
+  }
+
+  const redisReservationId = await redis.get(token);
+
+  return reservationId === redisReservationId;
+};
+
+export const getRedisReservationId = async (token: string) => {
+  return await redis.get(token);
 };
