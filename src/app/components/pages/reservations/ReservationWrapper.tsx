@@ -71,7 +71,6 @@ const ReservationWrapper = ({
   return (
     <div className="flex flex-col gap-4 w-full md:w-5/6 py-10 px-6">
       <span className="text-2xl font-bold">Reservation</span>
-      <button onClick={() => signOut()}>Sign out</button>
       {data?.reservation ? (
         <ReservationItem
           reservation={data.reservation}
