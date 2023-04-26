@@ -35,6 +35,7 @@ const useReservations = () => {
 
   return {
     reservations: reservationsData?.reservations || [],
+    mutate,
     isLoading,
     error,
     executeSearch,

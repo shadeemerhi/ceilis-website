@@ -1,5 +1,5 @@
-import Reservations from "@/app/components/pages/reservations/Reservations";
-import { getCurrentUser } from "@/app/util/helpers/users";
+import ReservationsWrapper from "@/app/components/pages/reservations/ReservationsWrapper";
+import { getCurrentUser, userIsManager } from "@/app/util/helpers/users";
 import { redirect } from "next/navigation";
 
 const ReservationsPage = async () => {
@@ -9,7 +9,7 @@ const ReservationsPage = async () => {
     redirect("/admin/login");
   }
 
-  if (!user.roles.includes("MANAGER")) {
+  if (!userIsManager(user)) {
     return (
       <div className="flex justify-center items-center">
         <span>Not authorized</span>
@@ -19,7 +19,7 @@ const ReservationsPage = async () => {
   return (
     <div className="flex flex-col items-center">
       <div className="w-full md:w-5/6 py-10 px-6 max-w-[900px]">
-        <Reservations />
+        <ReservationsWrapper />
       </div>
     </div>
   );

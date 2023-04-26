@@ -2,17 +2,19 @@ import {
   getReservations,
   handleNewReservation,
 } from "@/app/util/helpers/reservations";
-import { getCurrentUser } from "@/app/util/helpers/users";
+import { getCurrentUser, userIsManager } from "@/app/util/helpers/users";
 import { ICreateReservationInput } from "@/app/util/types";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   try {
-    // const user = await getCurrentUser();
+    const user = await getCurrentUser();
 
-    // if (!user) {
-    //   return new NextResponse("Not authorized");
-    // }
+    if (!user || !userIsManager(user)) {
+      return new NextResponse("Not authorized", {
+        status: 401,
+      });
+    }
 
     const reservations = await getReservations();
 

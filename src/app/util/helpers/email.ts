@@ -2,20 +2,14 @@ import NewReservationEmail from "@/app/components/email/NewReservationEmail";
 import { Reservation } from "@prisma/client";
 import { render } from "@react-email/render";
 import sgMail from "@sendgrid/mail";
+import { getManagerEmails } from "./users";
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
 
 export const sendNewReservationEmailToAdmins = async (
   reservation: Reservation
 ) => {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
-  /**
-   * Get admin emails
-   */
-  //   const adminEmails = await prisma.user.findMany({
-  //     where: "they-are-admin",
-  //     select: {
-  //       email: true,
-  //     },
-  //   });
+  // const adminEmails = await getManagerEmails();
   const adminEmails = ["shadeetesting1@gmail.com"];
 
   const html = render(
@@ -35,4 +29,18 @@ export const sendNewReservationEmailToAdmins = async (
    * Send email
    */
   return await sgMail.send(options);
+};
+
+export const sendReservationConfirmationEmailToCustomer = async (
+  reservation: Reservation
+) => {
+  /**
+   * @todo
+   * Send email
+   */
+  await new Promise((r) => setTimeout(r, 2000));
+
+  console.log(
+    `Successfully sent Reservation ${reservation.id} confirmation email to ${reservation.email}`
+  );
 };

@@ -1,7 +1,4 @@
-import {
-  getReservation,
-  getReservations,
-} from "@/app/util/helpers/reservations";
+import { handleReservationConfirmation } from "@/app/util/helpers/reservations";
 import { getCurrentUser, userIsManager } from "@/app/util/helpers/users";
 import { NextResponse } from "next/server";
 
@@ -11,26 +8,24 @@ interface RouteParams {
   };
 }
 
-export async function GET(req: Request, { params }: RouteParams) {
+export async function POST(req: Request, { params }: RouteParams) {
   try {
     const user = await getCurrentUser();
 
     if (!user || !userIsManager(user)) {
-      console.log("HITTING THIS STATEMENT", user);
-
-      //   return new NextResponse("Not authorized");
+      return new NextResponse("Not authorized", {
+        status: 401,
+      });
     }
-
-    console.log("UNDERNEATH", user);
 
     const { id } = params;
 
-    const reservation = await getReservation(id);
+    const reservation = await handleReservationConfirmation(id);
 
     return NextResponse.json({ reservation });
   } catch (error) {
     console.log(error);
-    return new NextResponse("Failed to retrieve reservations", {
+    return new NextResponse("Failed to confirm reservation", {
       status: 500,
     });
   }

@@ -1,10 +1,8 @@
 import NavLink from "@/app/components/design-system/NavLink";
-import React from "react";
+import { BUSINESS_NAME } from "@/app/util/constants";
+import { BiCopyright } from "react-icons/bi";
 import { BsInstagram } from "react-icons/bs";
 import { RiFacebookFill } from "react-icons/ri";
-import { BiCopyright } from "react-icons/bi";
-import Link from "next/link";
-import { BUSINESS_NAME } from "@/app/util/constants";
 
 const Footer = () => {
   return (
