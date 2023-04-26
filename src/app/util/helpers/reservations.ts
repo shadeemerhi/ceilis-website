@@ -1,6 +1,7 @@
 import { ICreateReservationInput } from "../types";
 import {
   sendNewReservationEmailToAdmins,
+  sendReservationCancellationEmailToManagers,
   sendReservationConfirmationEmailToCustomer,
 } from "./email";
 import prisma from "@/prisma/client";
@@ -125,6 +126,69 @@ export const handleReservationConfirmation = async (id: string) => {
     return updatedReservation;
   } catch (error) {
     console.log("handleReservationConfirmation error", error);
+    throw error;
+  }
+};
+
+export const handleReservationCancellation = async ({
+  id,
+  token,
+}: {
+  id: string;
+  token: string;
+}) => {
+  try {
+    /**
+     * Validate token
+     */
+    /**
+     * Get reservation
+     */
+    const reservation = await prisma.reservation.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!reservation) {
+      throw new Error(`Reservation ${id} not found`);
+    }
+
+    /**
+     * Verify reservation is not already cancelled
+     */
+    if (reservation.status === "CANCELLED") {
+      throw new Error(`Reservation ${id} has already been cancelled`);
+    }
+
+    /**
+     * Update the reservation to CANCELLED
+     */
+    const updatedReservation = await prisma.reservation.update({
+      where: {
+        id,
+      },
+      data: {
+        status: "CANCELLED",
+      },
+    });
+
+    /**
+     * Delete token
+     */
+
+    /**
+     * Send email to managers
+     */
+    await sendReservationCancellationEmailToManagers(updatedReservation);
+
+    console.log(
+      `Successfully sent Reservation ${reservation.id} cancellation email to managers`
+    );
+
+    return updatedReservation;
+  } catch (error) {
+    console.log("handleReservationCancellation error", error);
     throw error;
   }
 };

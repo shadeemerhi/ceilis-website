@@ -4,6 +4,7 @@ import useReservations from "@/app/hooks/useReservations";
 import Header from "./Header";
 import Loader from "./Loader";
 import ReservationItem from "./ReservationItem";
+import AdminButtons from "./item/AdminButtons";
 
 const ReservationsWrapper = () => {
   const { reservations, mutate, isLoading, error, executeSearch, clearSearch } =
@@ -20,7 +21,9 @@ const ReservationsWrapper = () => {
             <ReservationItem
               key={reservation.id}
               reservation={reservation}
-              mutate={mutate}
+              actionButtons={
+                <AdminButtons reservation={reservation} mutate={mutate} />
+              }
             />
           ))}
         </>

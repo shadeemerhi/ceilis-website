@@ -6,7 +6,7 @@ import { RiFacebookFill } from "react-icons/ri";
 
 const Footer = () => {
   return (
-    <div className="absolute bottom-0 flex flex-col justify-between gap-8 w-full bg-zinc-800 text-white px-10 pt-24 md:px-20 pb-32 md:pb-16">
+    <div className="absolute bottom-0 flex flex-col justify-between gap-8 w-full bg-zinc-800 text-white px-10 pt-10 md:px-20 pb-32 md:pb-16">
       <div className="flex flex-col items-center sm:items-start gap-6">
         <div className="flex gap-3">
           <RiFacebookFill size={24} />

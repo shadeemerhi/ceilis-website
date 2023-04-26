@@ -57,3 +57,15 @@ export const sendReservationConfirmationEmailToCustomer = async ({
     throw error;
   }
 };
+
+export const sendReservationCancellationEmailToManagers = async (
+  reservation: Reservation
+) => {
+  try {
+    // const managerEmails = await getManagerEmails();
+    await new Promise((r) => setTimeout(r, 2000));
+  } catch (error) {
+    console.log("sendReservationCancellationEmailToManagers", error);
+    throw error;
+  }
+};

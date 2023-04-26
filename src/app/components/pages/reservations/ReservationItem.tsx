@@ -1,44 +1,19 @@
 "use client";
 
 import { Reservation } from "@prisma/client";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import { KeyedMutator } from "swr";
-import Button from "../../design-system/Button";
-import Spinner from "../../design-system/Spinner";
-import StatusChip from "./StatusChip";
-import { confirmReservation } from "./ReservationWrapper";
 import { format } from "date-fns";
+import { ReactElement } from "react";
+import StatusChip from "./StatusChip";
 
-interface IReservationItemProps<MR> {
+interface IReservationItemProps {
   reservation: Reservation;
-  mutate: KeyedMutator<MR>;
+  actionButtons: ReactElement;
 }
 
-const ReservationItem = <MR,>({
+const ReservationItem = ({
   reservation,
-  mutate,
-}: IReservationItemProps<MR>) => {
-  const [isMutating, setIsMutating] = useState(false);
-
-  const onConfirmReservation = async () => {
-    setIsMutating(true);
-
-    try {
-      await confirmReservation(reservation.id);
-
-      mutate();
-      toast.success(
-        "Successfully confirm reservation. The customer has been notified"
-      );
-    } catch (error) {
-      console.log("handleConfirmReservation error", error);
-      toast.error("Failed to confirm reservation");
-    } finally {
-      setIsMutating(false);
-    }
-  };
-
+  actionButtons,
+}: IReservationItemProps) => {
   return (
     <div className="flex justify-between p-6 border border-zinc-200 rounded-md">
       <div className="flex flex-col gap-10">
@@ -73,27 +48,7 @@ const ReservationItem = <MR,>({
       </div>
       <div className="flex flex-col justify-between items-center">
         <StatusChip status={reservation.status} />
-        <div className="flex flex-col gap-4">
-          {isMutating ? (
-            <Spinner color="text-amber-500" />
-          ) : (
-            <>
-              <Button
-                text="Confirm"
-                variant="fill"
-                textColor="white"
-                disabled={reservation.status !== "PENDING"}
-                onClick={onConfirmReservation}
-              />
-              <Button
-                text="Decline"
-                variant="danger"
-                textColor="red-500"
-                disabled={reservation.status !== "PENDING"}
-              />
-            </>
-          )}
-        </div>
+        <div className="flex flex-col gap-4">{actionButtons}</div>
       </div>
     </div>
   );

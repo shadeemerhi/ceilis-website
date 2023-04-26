@@ -5,8 +5,8 @@ interface IStatusChipProps {
 }
 
 const StatusChip = ({ status }: IStatusChipProps) => {
-  let classes = "px-4 py-2 border rounded-full";
-  if (status === "DECLINED") {
+  let classes = "text-xs sm:text-base px-2 py-1 border rounded-full";
+  if (status === "DECLINED" || status === "CANCELLED") {
     classes += " border-red-500 text-red-500";
   }
 
