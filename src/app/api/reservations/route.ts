@@ -2,7 +2,8 @@ import {
   getReservations,
   handleNewReservation,
 } from "@/app/util/helpers/reservations";
-import { getCurrentUser, userIsManager } from "@/app/util/helpers/users";
+import { userIsManager } from "@/app/util/helpers/userIsManager";
+import { getCurrentUser } from "@/app/util/helpers/users";
 import { ICreateReservationInput } from "@/app/util/types";
 import { NextResponse } from "next/server";
 
