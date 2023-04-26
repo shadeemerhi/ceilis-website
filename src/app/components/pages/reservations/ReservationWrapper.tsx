@@ -9,6 +9,7 @@ import Loader from "./Loader";
 import ReservationItem from "./ReservationItem";
 import AdminButtons from "./item/AdminButtons";
 import CancelButton from "./item/CancelButton";
+import { signOut } from "next-auth/react";
 
 export const confirmReservation = async (id: string) => {
   const response = await fetch(`/api/reservations/${id}/confirmation`, {
@@ -25,8 +26,12 @@ export const confirmReservation = async (id: string) => {
   return response.json();
 };
 
-const getReservation = async (url: string) => {
-  const response = await fetch(url);
+const getReservation = async (args: Array<string>) => {
+  const response = await fetch(args[0], {
+    headers: {
+      Authentication: `Bearer ${args[1]}`,
+    },
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch reservation");
@@ -45,7 +50,7 @@ const ReservationWrapper = ({
   cancellationToken,
 }: IReservationWrapperProps) => {
   const { data, mutate, isLoading, error } = useSWR<IGetReservationResponse>(
-    `/api/reservations/${id}`,
+    [`/api/reservations/${id}`, cancellationToken],
     getReservation
   );
 
@@ -65,7 +70,8 @@ const ReservationWrapper = ({
 
   return (
     <div className="flex flex-col gap-4 w-full md:w-5/6 py-10 px-6">
-      <span className="text-2xl font-bold">Reservation {id}</span>
+      <span className="text-2xl font-bold">Reservation</span>
+      <button onClick={() => signOut()}>Sign out</button>
       {data?.reservation ? (
         <ReservationItem
           reservation={data.reservation}
