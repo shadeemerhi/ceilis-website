@@ -1,7 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import prisma from "@/prisma/client";
-import { User } from "@prisma/client";
 
 /**
  * Get current session user by email
@@ -51,8 +50,4 @@ export const getManagerEmails = async (): Promise<Array<string>> => {
    * Above filter does not satisfy TS (?)
    */
   return managerEmails as Array<string>;
-};
-
-export const userIsManager = (user: User) => {
-  return user.roles.includes("MANAGER") || user.roles.includes("ADMIN");
 };

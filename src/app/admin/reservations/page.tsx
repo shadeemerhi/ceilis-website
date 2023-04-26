@@ -1,5 +1,7 @@
+import NotAuthorized from "@/app/components/common/NotAuthorized";
 import ReservationsWrapper from "@/app/components/pages/reservations/ReservationsWrapper";
-import { getCurrentUser, userIsManager } from "@/app/util/helpers/users";
+import { userIsManager } from "@/app/util/helpers/userIsManager";
+import { getCurrentUser } from "@/app/util/helpers/users";
 import { redirect } from "next/navigation";
 
 const ReservationsPage = async () => {
@@ -10,11 +12,7 @@ const ReservationsPage = async () => {
   }
 
   if (!userIsManager(user)) {
-    return (
-      <div className="flex justify-center items-center">
-        <span>Not authorized</span>
-      </div>
-    );
+    return <NotAuthorized />;
   }
   return (
     <div className="flex flex-col items-center">

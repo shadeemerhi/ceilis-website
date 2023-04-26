@@ -1,7 +1,7 @@
-import ReservationItem from "@/app/components/pages/reservations/ReservationItem";
+import NotAuthorized from "@/app/components/common/NotAuthorized";
 import ReservationWrapper from "@/app/components/pages/reservations/ReservationWrapper";
-import { getCurrentUser, userIsManager } from "@/app/util/helpers/users";
-import { IGetReservationResponse } from "@/app/util/types";
+import { userIsManager } from "@/app/util/helpers/userIsManager";
+import { getCurrentUser } from "@/app/util/helpers/users";
 import { redirect } from "next/navigation";
 
 interface IReservationPageParams {
@@ -18,11 +18,7 @@ const ReservationPage = async ({ params: { id } }: IReservationPageParams) => {
   }
 
   if (!userIsManager(user)) {
-    return (
-      <div className="flex justify-center items-center">
-        <span>Not authorized</span>
-      </div>
-    );
+    return <NotAuthorized />;
   }
 
   return (

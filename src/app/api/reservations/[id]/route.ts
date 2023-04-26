@@ -2,7 +2,8 @@ import {
   getReservation,
   getReservations,
 } from "@/app/util/helpers/reservations";
-import { getCurrentUser, userIsManager } from "@/app/util/helpers/users";
+import { userIsManager } from "@/app/util/helpers/userIsManager";
+import { getCurrentUser } from "@/app/util/helpers/users";
 import { NextResponse } from "next/server";
 
 interface RouteParams {
@@ -16,12 +17,8 @@ export async function GET(req: Request, { params }: RouteParams) {
     const user = await getCurrentUser();
 
     if (!user || !userIsManager(user)) {
-      console.log("HITTING THIS STATEMENT", user);
-
-      //   return new NextResponse("Not authorized");
+      return new NextResponse("Not authorized");
     }
-
-    console.log("UNDERNEATH", user);
 
     const { id } = params;
 
