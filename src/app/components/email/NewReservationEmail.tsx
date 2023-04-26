@@ -40,7 +40,7 @@ const NewReservationEmail = ({ reservation }: INewReservationEmail) => {
                   pX={20}
                   pY={12}
                   className="bg-amber-500 rounded text-white font-semibold no-underline text-center text-lg"
-                  href={`http://localhost:3000/admin/reservations/${reservation.id}`}
+                  href={`${process.env.BASE_URL}/admin/reservations/${reservation.id}`}
                   target="_blank"
                 >
                   Confirm Reservation
