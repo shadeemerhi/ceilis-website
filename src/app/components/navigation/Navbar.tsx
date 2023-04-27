@@ -11,7 +11,7 @@ const Navbar = () => {
     <div className="flex sticky top-0 w-full z-10 justify-between px-6 bg-zinc-800 font-light h-24">
       <Link href="/" className="flex items-center">
         <Image
-          src="/vercel.svg"
+          src="/ceilis-logo-black.png"
           alt="Vercel Logo"
           width={100}
           height={24}
