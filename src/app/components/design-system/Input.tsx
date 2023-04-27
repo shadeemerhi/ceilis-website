@@ -1,10 +1,14 @@
 import { HTMLProps } from "react";
 
-const Input = (props: HTMLProps<HTMLInputElement>) => {
+interface InputProps extends HTMLProps<HTMLInputElement> {
+  additionalClasses?: string;
+}
+
+const Input = ({ additionalClasses, ...rest }: InputProps) => {
   return (
     <input
-      {...props}
-      className="
+      {...rest}
+      className={`
         px-2 
         py-1
         w-full 
@@ -13,7 +17,9 @@ const Input = (props: HTMLProps<HTMLInputElement>) => {
         border-[1px]
         outline-[1px]
         text-black
-        placeholder:text-zinc-500"
+        placeholder:text-zinc-500 
+        ${additionalClasses && additionalClasses}
+      `}
     />
   );
 };
