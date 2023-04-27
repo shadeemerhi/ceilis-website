@@ -1,8 +1,18 @@
 import NavLink from "@/app/components/design-system/NavLink";
 import { BUSINESS_NAME } from "@/app/util/constants";
+import { IconType } from "react-icons";
 import { BiCopyright } from "react-icons/bi";
 import { BsInstagram } from "react-icons/bs";
+import {
+  HiOutlineLocationMarker,
+  HiOutlineMail,
+  HiOutlinePhone,
+} from "react-icons/hi";
 import { RiFacebookFill } from "react-icons/ri";
+
+const LOCATION_ADDRESS = "#7155 8650 112 Ave NW, Calgary, AB T3R 0R5";
+const LOCATION_EMAIL = "royaloak@ceilis.com";
+const LOCATION_PHONE = "587-352-0800";
 
 const Footer = () => {
   return (
@@ -17,6 +27,7 @@ const Footer = () => {
           <NavLink text="Contact Us" href="/contact" />
           <NavLink text="About Us" href="/about" />
         </div>
+        <BusinessInformation />
       </div>
       <div className="flex flex-col items-center sm:items-start gap-1 text-sm text-zinc-400">
         <div className="flex items-center gap-1">
@@ -25,6 +36,38 @@ const Footer = () => {
         </div>
         <span>Developed by Shadee Merhi</span>
       </div>
+    </div>
+  );
+};
+
+const BusinessInformation = () => {
+  return (
+    <div className="flex flex-col gap-3 text-zinc-300">
+      <BusinessInformationItem
+        item={{ icon: HiOutlineLocationMarker, text: LOCATION_ADDRESS }}
+      />
+      <BusinessInformationItem
+        item={{ icon: HiOutlineMail, text: LOCATION_EMAIL }}
+      />
+      <BusinessInformationItem
+        item={{ icon: HiOutlinePhone, text: LOCATION_PHONE }}
+      />
+    </div>
+  );
+};
+
+const BusinessInformationItem = ({
+  item,
+}: {
+  item: {
+    icon: IconType;
+    text: string;
+  };
+}) => {
+  return (
+    <div className="flex flex-col sm:flex-row items-center gap-2">
+      <item.icon size={24} />
+      <span>{item.text}</span>
     </div>
   );
 };
