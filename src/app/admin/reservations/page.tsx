@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 const ReservationsPage = async () => {
   const user = await getCurrentUser();
 
-  await redis.set("test", "someKey");
+  await redis.set("test", "roflbuddddddd");
 
   const value = await redis.get("test");
 
