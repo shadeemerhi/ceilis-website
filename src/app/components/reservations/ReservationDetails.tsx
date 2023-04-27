@@ -32,7 +32,7 @@ const ReservationDetails = ({
           type="date"
           placeholder="yyyy-mm-dd"
           onChange={handleInputChange}
-          value={reservation.date}
+          value={reservation.date || "yyyy-mm-dd"}
           additionalClasses="min-w-[254px]"
         />
         {errors.date && <span className="text-red-500">{errors.date}</span>}
