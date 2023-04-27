@@ -1,4 +1,5 @@
 export const BUSINESS_NAME = "Ceili's Modern Irish Pub";
+export const LIGHTSPEED_LINK = "https://ceilis.lightspeedordering.com/";
 
 /**
  * Reservations
