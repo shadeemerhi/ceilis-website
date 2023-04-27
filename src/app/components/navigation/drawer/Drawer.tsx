@@ -2,7 +2,6 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { IoCloseOutline } from "react-icons/io5";
 import DrawerContent from "./DrawerContent";
 
 interface IDrawerProps {

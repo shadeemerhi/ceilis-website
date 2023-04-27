@@ -11,6 +11,7 @@ interface IUserActionProps {
 
 const UserActions = ({ closeDrawer }: IUserActionProps) => {
   const { user, userIsManager } = useCurrentUser();
+
   if (!user) {
     return null;
   }

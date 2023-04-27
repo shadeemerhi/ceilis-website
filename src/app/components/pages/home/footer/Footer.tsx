@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "@/app/components/design-system/Button";
 import NavLink from "@/app/components/design-system/NavLink";
 import UserActions from "@/app/components/navigation/UserActions";
 import { useCurrentUser } from "@/app/hooks/useCurrentUser";

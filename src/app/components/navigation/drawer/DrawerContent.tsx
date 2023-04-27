@@ -1,9 +1,7 @@
+import { useCurrentUser } from "@/app/hooks/useCurrentUser";
 import { IoCloseOutline } from "react-icons/io5";
 import NavLink from "../../design-system/NavLink";
 import ActionButtons from "../ActionButtons";
-import { AiOutlineMenu } from "react-icons/ai";
-import { useCurrentUser } from "@/app/hooks/useCurrentUser";
-import Button from "../../design-system/Button";
 import UserActions from "../UserActions";
 
 interface IDrawerContentProps {
@@ -11,10 +9,6 @@ interface IDrawerContentProps {
 }
 
 const DrawerContent = ({ closeDrawer }: IDrawerContentProps) => {
-  const { user, userIsManager } = useCurrentUser();
-
-  const handleSignOutClick = () => {};
-
   return (
     <div className="fixed right-0 z-10 h-full w-3/4 bg-zinc-800">
       <div className="flex flex-col justify-between h-full">
