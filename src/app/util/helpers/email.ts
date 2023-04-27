@@ -8,7 +8,7 @@ import ReservationCancelledEmail from "@/app/components/email/ReservationCancell
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
 
-const SENDGRID_EMAIL = "shadeetesting2@gmail.com";
+const SENDGRID_EMAIL = process.env.SENDGRID_EMAIL as string;
 
 export const sendNewReservationEmailToAdmins = async (
   reservation: Reservation
