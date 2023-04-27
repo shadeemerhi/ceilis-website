@@ -2,7 +2,7 @@
 
 import useReservations from "@/app/hooks/useReservations";
 import Header from "./Header";
-import Loader from "./Loader";
+import Loader from "../../common/Loader";
 import ReservationItem from "./ReservationItem";
 import AdminButtons from "./item/AdminButtons";
 

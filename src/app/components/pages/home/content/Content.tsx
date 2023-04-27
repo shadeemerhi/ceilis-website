@@ -1,6 +1,7 @@
 import Button from "@/app/components/design-system/Button";
 import ReservationButton from "@/app/components/reservations/ReservationButton";
 import Image from "next/image";
+import Link from "next/link";
 
 const Content = () => {
   return (
@@ -17,12 +18,9 @@ const Content = () => {
         <div className="flex flex-col justify-center items-center gap-4 flex-1">
           <span className="text-4xl whitespace-nowrap">{`Section One Text`}</span>
           <span className="text-lg font-light">{`This is some supplemental text`}</span>
-          <Button
-            text="View Menu"
-            // onClick={() => {}}
-            variant="border"
-            textColor="black"
-          />
+          <Link href={"/menu/food"}>
+            <Button text="View Menu" variant="border" textColor="black" />
+          </Link>
         </div>
       </div>
       <div

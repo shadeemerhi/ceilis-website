@@ -1,4 +1,4 @@
-import Spinner from "../../design-system/Spinner";
+import Spinner from "../design-system/Spinner";
 
 const Loader = () => {
   return (

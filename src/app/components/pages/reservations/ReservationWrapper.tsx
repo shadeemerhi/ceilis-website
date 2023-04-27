@@ -5,11 +5,10 @@ import { userIsManager } from "@/app/util/helpers/userIsManager";
 import { IGetReservationResponse } from "@/app/util/types";
 import Link from "next/link";
 import useSWR from "swr";
-import Loader from "./Loader";
+import Loader from "../../common/Loader";
 import ReservationItem from "./ReservationItem";
 import AdminButtons from "./item/AdminButtons";
 import CancelButton from "./item/CancelButton";
-import { signOut } from "next-auth/react";
 
 export const confirmReservation = async (id: string) => {
   const response = await fetch(`/api/reservations/${id}/confirmation`, {
