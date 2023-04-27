@@ -29,7 +29,7 @@ export default async function RootLayout({
             <Navbar />
             <ReservationModal />
             <div className="relative flex-1">
-              {children}
+              <div className="min-h-[65vh]">{children}</div>
               <Footer />
             </div>
             <MobileBottomNav />

@@ -1,38 +1,51 @@
 import Button from "@/app/components/design-system/Button";
-import React from "react";
-import ContentItem from "./ContentItem";
 import ReservationButton from "@/app/components/reservations/ReservationButton";
+import Image from "next/image";
 
 const Content = () => {
   return (
     <section>
-      <ContentItem
-        imageUrl="/content-item-one.jpg"
-        titleText="Section One Text"
-        supplementalText="This is some supplemental text"
-        actionButton={
+      <div className={`flex flex-col gap-10 md:flex-row px-6 md:px-20 py-16`}>
+        <div className="relative aspect-square w-full md:w-1/2">
+          <Image
+            src="/content-item-one.jpg"
+            alt="image"
+            fill
+            className="object-cover h-full w-full"
+          />
+        </div>
+        <div className="flex flex-col justify-center items-center gap-4 flex-1">
+          <span className="text-4xl whitespace-nowrap">{`Section One Text`}</span>
+          <span className="text-lg font-light">{`This is some supplemental text`}</span>
           <Button
             text="View Menu"
             // onClick={() => {}}
             variant="border"
             textColor="black"
           />
-        }
-        flexDirection="row"
-      />
-      <ContentItem
-        imageUrl="/content-item-two.jpg"
-        titleText="Section Two Text"
-        supplementalText="This is some supplemental text"
-        actionButton={
+        </div>
+      </div>
+      <div
+        className={`flex flex-col gap-10 md:flex-row-reverse px-6 md:px-20 py-16`}
+      >
+        <div className="relative aspect-square w-full md:w-1/2">
+          <Image
+            src="/content-item-two.jpg"
+            alt="image"
+            fill
+            className="object-cover h-full w-full"
+          />
+        </div>
+        <div className="flex flex-col justify-center items-center gap-4 flex-1">
+          <span className="text-4xl whitespace-nowrap">{`Section Two Text`}</span>
+          <span className="text-lg font-light">{`This is some supplemental text`}</span>
           <ReservationButton
             text="Reserve Now"
             variant="border"
             textColor="black"
           />
-        }
-        flexDirection="row-reverse"
-      />
+        </div>
+      </div>
     </section>
   );
 };
