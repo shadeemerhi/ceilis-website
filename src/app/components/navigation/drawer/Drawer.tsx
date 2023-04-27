@@ -3,6 +3,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { IoCloseOutline } from "react-icons/io5";
+import DrawerContent from "./DrawerContent";
 
 interface IDrawerProps {
   open: boolean;
@@ -16,13 +17,13 @@ const Drawer = ({ open, closeDrawer }: IDrawerProps) => {
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
           leave="ease-in duration-200"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-zinc-900 bg-opacity-50" />
+          <div className="fixed inset-0 bg-zinc-900 bg-opacity-80" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
@@ -33,10 +34,8 @@ const Drawer = ({ open, closeDrawer }: IDrawerProps) => {
           leaveFrom="translate-x-0"
           leaveTo="translate-x-full"
         >
-          <div className="fixed inset-0 z-50">
-            <div className="fixed right-0 z-10 h-full w-3/4 bg-gray-50">
-              <IoCloseOutline onClick={closeDrawer} />
-            </div>
+          <div className="fixed inset-0 right-0 z-40">
+            <DrawerContent closeDrawer={closeDrawer} />
           </div>
         </Transition.Child>
       </Dialog>

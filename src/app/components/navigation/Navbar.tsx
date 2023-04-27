@@ -5,7 +5,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import NavLink from "../design-system/NavLink";
 import ActionButtons from "./ActionButtons";
 import Link from "next/link";
-import Drawer from "../design-system/Drawer";
+import Drawer from "./drawer/Drawer";
 import { useModal } from "@/app/hooks/useModal";
 
 const Navbar = () => {

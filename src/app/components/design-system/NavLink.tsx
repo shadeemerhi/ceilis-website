@@ -1,13 +1,14 @@
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 
-interface INavLinkProps {
+interface INavLinkProps extends LinkProps {
   text: string;
   href: string;
 }
 
-const NavLink = ({ text, href }: INavLinkProps) => {
+const NavLink = ({ text, href, ...rest }: INavLinkProps) => {
   return (
     <Link
+      {...rest}
       href={href}
       className="tracking-widest hover:text-zinc-300 text-white"
     >

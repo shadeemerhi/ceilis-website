@@ -1,4 +1,9 @@
+"use client";
+
+import Button from "@/app/components/design-system/Button";
 import NavLink from "@/app/components/design-system/NavLink";
+import UserActions from "@/app/components/navigation/UserActions";
+import { useCurrentUser } from "@/app/hooks/useCurrentUser";
 import { BUSINESS_NAME } from "@/app/util/constants";
 import { IconType } from "react-icons";
 import { BiCopyright } from "react-icons/bi";
@@ -15,6 +20,7 @@ const LOCATION_EMAIL = "royaloak@ceilis.com";
 const LOCATION_PHONE = "587-352-0800";
 
 const Footer = () => {
+  const { user, userIsManager } = useCurrentUser();
   return (
     <div className="flex flex-col justify-between gap-8 w-full bg-zinc-800 text-white px-10 pt-10 md:px-20 pb-32 md:pb-16">
       <div className="flex flex-col items-center sm:items-start gap-6">
@@ -29,12 +35,17 @@ const Footer = () => {
         </div>
         <BusinessInformation />
       </div>
-      <div className="flex flex-col items-center sm:items-start gap-1 text-sm text-zinc-400">
-        <div className="flex items-center gap-1">
-          <BiCopyright />
-          <span>{`${BUSINESS_NAME}, 2023.`}</span>
+      <div className="flex justify-center md:justify-between items-center">
+        <div className="flex flex-col items-center sm:items-start gap-1 text-sm text-zinc-400">
+          <div className="flex items-center gap-1">
+            <BiCopyright />
+            <span>{`${BUSINESS_NAME}, 2023.`}</span>
+          </div>
+          <span>Developed by Shadee Merhi</span>
         </div>
-        <span>Developed by Shadee Merhi</span>
+        <div className="hidden md:flex">
+          <UserActions />
+        </div>
       </div>
     </div>
   );

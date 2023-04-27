@@ -1,7 +1,11 @@
 import Button from "../design-system/Button";
 import ReservationButton from "../reservations/ReservationButton";
 
-const ActionButtons = () => {
+interface IActionButtonsProps {
+  flexDir?: string;
+}
+
+const ActionButtons = ({ flexDir }: IActionButtonsProps) => {
   return (
     <>
       <ReservationButton
