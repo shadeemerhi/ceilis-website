@@ -1,72 +1,40 @@
 import prisma from "../prisma/client";
-// import {
-//   beerCategories,
-//   beerItems,
-//   foodCategories,
-//   foodItems,
-//   spiritCategories,
-//   spiritItems,
-//   wineCategories,
-//   wineItems,
-// } from "./seedData";
+import {
+  beerCategories,
+  foodCategories,
+  spiritCategories,
+  wineCategories,
+} from "./seedData";
 
-// const insertFoodCategories = async () => {
-//   await prisma.foodCategory.createMany({
-//     data: foodCategories,
-//   });
-// };
+const insertFoodCategories = async () => {
+  await prisma.foodCategory.createMany({
+    data: foodCategories,
+  });
+};
 
-// const insertFoodItems = async () => {
-//   await prisma.foodItem.createMany({
-//     data: foodItems,
-//   });
-// };
+const insertBeerCategories = async () => {
+  await prisma.beerCategory.createMany({
+    data: beerCategories,
+  });
+};
 
-// const insertBeerCategories = async () => {
-//   await prisma.beerCategory.createMany({
-//     data: beerCategories,
-//   });
-// };
+const insertWineCategories = async () => {
+  await prisma.wineCategory.createMany({
+    data: wineCategories,
+  });
+};
 
-// const insertBeerItems = async () => {
-//   await prisma.beerItem.createMany({
-//     data: beerItems,
-//   });
-// };
-
-// const insertWineCategories = async () => {
-//   await prisma.wineCategory.createMany({
-//     data: wineCategories,
-//   });
-// };
-
-// const insertWineItems = async () => {
-//   await prisma.wineItem.createMany({
-//     data: wineItems,
-//   });
-// };
-
-// const insertSpiritCategories = async () => {
-//   await prisma.spiritCategory.createMany({
-//     data: spiritCategories,
-//   });
-// };
-
-// const insertSpiritItems = async () => {
-//   await prisma.spiritItem.createMany({
-//     data: spiritItems,
-//   });
-// };
+const insertSpiritCategories = async () => {
+  await prisma.spiritCategory.createMany({
+    data: spiritCategories,
+  });
+};
 
 async function main() {
-  // await insertFoodCategories();
-  //   await insertFoodItems();
-  //   await insertBeerCategories();
-  //   await insertBeerItems();
-  //   await insertWineCategories();
-  //   await insertWineItems();
-  //   await insertSpiritCategories();
-  // await insertSpiritItems();
+  await insertFoodCategories();
+  await insertBeerCategories();
+  await insertWineCategories();
+  await insertSpiritCategories();
 }
 
 main()
