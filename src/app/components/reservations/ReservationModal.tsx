@@ -39,7 +39,7 @@ const ReservationModal = () => {
   const [reservation, setReservation] = useState<ICreateReservationInput>({
     date: "",
     time: TIME_OPTIONS[0],
-    numberOfGuests: "0",
+    numberOfGuests: "1",
     email: "",
     name: "",
     phone: "",
