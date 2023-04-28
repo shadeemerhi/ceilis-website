@@ -1,5 +1,4 @@
 import { IoCloseOutline } from "react-icons/io5";
-import Button from "../../design-system/Button";
 import NavLink from "../../design-system/NavLink";
 import ActionButtons from "../ActionButtons";
 import UserActions from "../UserActions";
@@ -33,11 +32,12 @@ const DrawerContent = ({ closeDrawer }: IDrawerContentProps) => {
                 href="/gift-cards"
                 onClick={closeDrawer}
               />
-              <Button
-                text="Contact Us"
+              <button
+                className="tracking-widest hover:text-zinc-300 text-white whitespace-nowrap"
                 onClick={onContactUsClick}
-                additionalClasses="h-0"
-              />
+              >
+                Contact Us
+              </button>
             </div>
             <div className="flex flex-col gap-4 mt-4">
               <ActionButtons />
