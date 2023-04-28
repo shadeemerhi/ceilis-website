@@ -22,7 +22,7 @@ const HeaderButtons = <T extends object>({
   }
 
   return (
-    <>
+    <div className="hidden sm:flex w-44">
       {selectedItem ? (
         <Button
           text="Cancel"
@@ -43,7 +43,7 @@ const HeaderButtons = <T extends object>({
           }
         />
       )}
-    </>
+    </div>
   );
 };
 
