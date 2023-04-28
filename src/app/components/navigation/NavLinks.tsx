@@ -24,7 +24,7 @@ const NavLinks = ({ closeDrawer }: INavLinksProps) => {
       <Button
         text="Contact Us"
         onClick={onContactUsClick}
-        additionalClasses="h-0"
+        additionalClasses={closeDrawer ? "h-0" : ""}
       />
     </>
   );

@@ -28,7 +28,7 @@ const Navbar = () => {
           />
         </Link>
         <div className="flex items-center gap-8">
-          <div className="hidden md:flex gap-4">
+          <div className="hidden md:flex items-center gap-4">
             <NavLinks />
           </div>
           <div className="hidden md:flex gap-4">
