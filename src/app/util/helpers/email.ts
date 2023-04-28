@@ -74,8 +74,8 @@ export const sendReservationCancellationEmailToManagers = async (
 
     const options = {
       to: managerEmails,
-      from: "shadmerhi@gmail.com", // must be verified Single Sender email address
-      subject: "New Reservation",
+      from: SENDGRID_EMAIL, // will be Ceili's email
+      subject: "Reservation Cancelled",
       html,
     };
 
