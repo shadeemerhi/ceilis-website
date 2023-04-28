@@ -50,7 +50,7 @@ const Content = () => {
           />
         </div>
       </div>
-      <div className="flex justify-evenly items-center px-6 md:px-20 py-16">
+      <div className="flex justify-evenly items-center md:px-20 py-16">
         <Link href={SKIP_THE_DISHES_LINK} target="_blank">
           <Image src="/skip-logo.svg" height={150} width={150} alt="skip" />
         </Link>
