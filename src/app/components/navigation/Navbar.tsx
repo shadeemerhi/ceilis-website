@@ -4,8 +4,8 @@ import { useModal } from "@/app/hooks/useModal";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineMenu } from "react-icons/ai";
-import NavLink from "../design-system/NavLink";
 import ActionButtons from "./ActionButtons";
+import NavLinks from "./NavLinks";
 import Drawer from "./drawer/Drawer";
 
 const Navbar = () => {
@@ -14,6 +14,7 @@ const Navbar = () => {
     openModal: openDrawer,
     closeModal: closeDrawer,
   } = useModal();
+
   return (
     <>
       <Drawer open={open} closeDrawer={closeDrawer} />
@@ -28,10 +29,8 @@ const Navbar = () => {
           />
         </Link>
         <div className="flex items-center gap-8">
-          <div className="hidden md:flex items-center gap-4">
-            <NavLink text="Menu" href="/menu/food" />
-            <NavLink text="Gift Cards" href="/gift-cards" />
-            <NavLink text="Contact Us" href="/contact" />
+          <div className="hidden md:flex gap-4">
+            <NavLinks />
           </div>
           <div className="hidden md:flex gap-4">
             <ActionButtons />

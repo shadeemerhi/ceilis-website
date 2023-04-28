@@ -10,7 +10,7 @@ const NavLink = ({ text, href, ...rest }: INavLinkProps) => {
     <Link
       {...rest}
       href={href}
-      className="tracking-widest hover:text-zinc-300 text-white"
+      className="tracking-widest hover:text-zinc-300 text-white whitespace-nowrap"
     >
       {text}
     </Link>

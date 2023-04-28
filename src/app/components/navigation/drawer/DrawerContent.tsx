@@ -1,7 +1,6 @@
-import { useCurrentUser } from "@/app/hooks/useCurrentUser";
 import { IoCloseOutline } from "react-icons/io5";
-import NavLink from "../../design-system/NavLink";
 import ActionButtons from "../ActionButtons";
+import NavLinks from "../NavLinks";
 import UserActions from "../UserActions";
 
 interface IDrawerContentProps {
@@ -22,19 +21,9 @@ const DrawerContent = ({ closeDrawer }: IDrawerContentProps) => {
           </div>
           <div className="flex flex-col gap-10 items-center text-center">
             <div className="flex flex-col gap-4">
-              <NavLink text="Menu" href="/menu/food" onClick={closeDrawer} />
-              <NavLink
-                text="Gift Cards"
-                href="/gift-cards"
-                onClick={closeDrawer}
-              />
-              <NavLink
-                text="Contact Us"
-                href="/contact"
-                onClick={closeDrawer}
-              />
+              <NavLinks closeDrawer={closeDrawer} />
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mt-4">
               <ActionButtons />
             </div>
           </div>

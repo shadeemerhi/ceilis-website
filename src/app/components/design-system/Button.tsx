@@ -8,14 +8,23 @@ interface IButtonProps extends HTMLProps<HTMLButtonElement> {
   textColor?: string;
   variant?: ButtonVariant;
   type?: "button" | "submit";
+  additionalClasses?: string;
 }
 
 const Button = (props: IButtonProps) => {
-  const { variant = "default", textColor = "white", text, type } = props;
+  const {
+    variant = "default",
+    textColor = "white",
+    text,
+    type,
+    additionalClasses,
+  } = props;
   return (
     <button
       {...props}
-      className={getButtonClasses(variant, textColor)}
+      className={`${getButtonClasses(variant, textColor)} ${
+        additionalClasses && additionalClasses
+      }`}
       type={type}
     >
       {text}
