@@ -1,5 +1,11 @@
 export const BUSINESS_NAME = "Ceili's Modern Irish Pub";
 export const LIGHTSPEED_LINK = "https://ceilis.lightspeedordering.com/";
+export const SKIP_THE_DISHES_LINK =
+  "https://www.skipthedishes.com/ceilis-irish-pub";
+export const UBER_EATS_LINK =
+  "https://www.ubereats.com/ca/store/ceilis-royal-oak/iyBkEn7PQPO9iZL8UzadyA";
+export const DOORDASH_LINK =
+  "https://www.doordash.com/store/ceilis-royal-oak-calgary-926936/";
 
 /**
  * Reservations

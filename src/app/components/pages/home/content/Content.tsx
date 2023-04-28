@@ -1,7 +1,13 @@
 import Button from "@/app/components/design-system/Button";
 import ReservationButton from "@/app/components/reservations/ReservationButton";
+import {
+  DOORDASH_LINK,
+  SKIP_THE_DISHES_LINK,
+  UBER_EATS_LINK,
+} from "@/app/util/constants";
 import Image from "next/image";
 import Link from "next/link";
+import { SiDoordash, SiUbereats } from "react-icons/si";
 
 const Content = () => {
   return (
@@ -43,6 +49,17 @@ const Content = () => {
             textColor="black"
           />
         </div>
+      </div>
+      <div className="flex justify-evenly items-center px-6 md:px-20 py-16">
+        <Link href={SKIP_THE_DISHES_LINK} target="_blank">
+          <Image src="/skip-logo.svg" height={150} width={150} alt="skip" />
+        </Link>
+        <Link href={UBER_EATS_LINK} target="_blank">
+          <SiUbereats size={65} className="text-[#1E1E1E]" />
+        </Link>
+        <Link href={DOORDASH_LINK} target="_blank">
+          <SiDoordash size={65} className="text-[#1E1E1E]" />
+        </Link>
       </div>
     </section>
   );
