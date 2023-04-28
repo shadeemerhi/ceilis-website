@@ -6,6 +6,9 @@ export const UBER_EATS_LINK =
   "https://www.ubereats.com/ca/store/ceilis-royal-oak/iyBkEn7PQPO9iZL8UzadyA";
 export const DOORDASH_LINK =
   "https://www.doordash.com/store/ceilis-royal-oak-calgary-926936/";
+export const INSTAGRAM_LINK = "https://www.instagram.com/ceilisroyaloak";
+export const FACEBOOK_LINK =
+  "https://www.facebook.com/people/Ceilis-Royal-Oak/100063496816090";
 
 /**
  * Reservations

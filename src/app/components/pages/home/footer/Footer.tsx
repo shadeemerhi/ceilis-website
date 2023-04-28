@@ -2,7 +2,12 @@
 
 import NavLink from "@/app/components/design-system/NavLink";
 import UserActions from "@/app/components/navigation/UserActions";
-import { BUSINESS_NAME } from "@/app/util/constants";
+import {
+  BUSINESS_NAME,
+  FACEBOOK_LINK,
+  INSTAGRAM_LINK,
+} from "@/app/util/constants";
+import Link from "next/link";
 import { IconType } from "react-icons";
 import { BiCopyright } from "react-icons/bi";
 import { BsInstagram } from "react-icons/bs";
@@ -22,8 +27,12 @@ const Footer = () => {
     <div className="flex flex-col justify-between gap-8 w-full bg-zinc-800 text-white px-10 pt-10 md:px-20 pb-32 md:pb-16">
       <div className="flex flex-col items-center sm:items-start gap-6">
         <div className="flex gap-3">
-          <RiFacebookFill size={24} />
-          <BsInstagram size={22} />
+          <Link href={FACEBOOK_LINK} target="_blank">
+            <RiFacebookFill size={24} />
+          </Link>
+          <Link href={INSTAGRAM_LINK} target="_blank">
+            <BsInstagram size={22} />
+          </Link>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 text-center">
           <NavLink text="Gift Cards" href="/gift-cards" />
