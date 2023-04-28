@@ -29,7 +29,6 @@ const Footer = () => {
         </div>
         <div className="flex flex-col sm:flex-row gap-4 text-center">
           <NavLink text="Gift Cards" href="/gift-cards" />
-          <NavLink text="Contact Us" href="/contact" />
           <NavLink text="About Us" href="/about" />
         </div>
         <BusinessInformation />

@@ -1,12 +1,12 @@
 "use client";
 
+import { useModal } from "@/app/hooks/useModal";
 import Image from "next/image";
+import Link from "next/link";
 import { AiOutlineMenu } from "react-icons/ai";
 import NavLink from "../design-system/NavLink";
 import ActionButtons from "./ActionButtons";
-import Link from "next/link";
 import Drawer from "./drawer/Drawer";
-import { useModal } from "@/app/hooks/useModal";
 
 const Navbar = () => {
   const {
@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="flex sticky top-0 w-full z-10 justify-between px-6 bg-zinc-800 font-light h-24">
         <Link href="/" className="flex items-center">
           <Image
-            src="/ceilis-logo-black.png"
+            src="/ceilis-logo-white.png"
             alt="Vercel Logo"
             width={100}
             height={24}
@@ -28,7 +28,7 @@ const Navbar = () => {
           />
         </Link>
         <div className="flex items-center gap-8">
-          <div className="hidden md:flex gap-4">
+          <div className="hidden md:flex items-center gap-4">
             <NavLink text="Menu" href="/menu/food" />
             <NavLink text="Gift Cards" href="/gift-cards" />
             <NavLink text="Contact Us" href="/contact" />
