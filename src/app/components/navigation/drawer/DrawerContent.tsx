@@ -10,8 +10,8 @@ interface IDrawerContentProps {
 
 const DrawerContent = ({ closeDrawer }: IDrawerContentProps) => {
   const onContactUsClick = () => {
+    window.scrollTo({ top: document.body.scrollHeight });
     closeDrawer();
-    window.scrollTo({ behavior: "smooth", top: document.body.scrollHeight });
   };
 
   return (
