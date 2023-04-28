@@ -8,12 +8,14 @@ const Hero = () => {
         src="/hero.png"
         alt="hero"
         fill
+        priority
         className="hidden sm:flex object-cover h-full w-full"
       />
       <Image
         src="/hero-mobile.jpg"
         alt="hero-mobile"
         fill
+        priority
         className="sm:hidden object-cover h-full w-full"
       />
       <HeroOverlay />
