@@ -1,3 +1,5 @@
+import { userIsManager } from "@/app/util/helpers/userIsManager";
+import { getCurrentUser } from "@/app/util/helpers/users";
 import { ICreateItemInput } from "@/app/util/types";
 import prisma from "@/prisma/client";
 import { FoodItem } from "@prisma/client";
@@ -21,6 +23,14 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    const user = await getCurrentUser();
+
+    if (!user || !userIsManager(user)) {
+      return new NextResponse("Not authorized", {
+        status: 401,
+      });
+    }
+
     const data = (await req.json()) as ICreateItemInput<FoodItem>;
 
     const item = await prisma.foodItem.create({
