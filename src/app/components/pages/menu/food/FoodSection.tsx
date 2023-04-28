@@ -27,7 +27,6 @@ const FOOD_ITEM_TEMPLATE: ICreateItemInput<IFoodItem> = {
 };
 
 const FoodSection = ({ category }: IFoodSectionProps) => {
-  const isAdmin = true;
   const [selectedItem, setSelectedItem] =
     useState<ISelectedItem<IFoodItem>>(null);
 

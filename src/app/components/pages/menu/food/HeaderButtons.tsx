@@ -1,4 +1,5 @@
 import Button from "@/app/components/design-system/Button";
+import { useCurrentUser } from "@/app/hooks/useCurrentUser";
 import { Dispatch, SetStateAction } from "react";
 
 interface IHeaderButtonsProps<T> {
@@ -14,6 +15,12 @@ const HeaderButtons = <T extends object>({
   categoryId,
   itemTemplate,
 }: IHeaderButtonsProps<T>) => {
+  const { userIsManager } = useCurrentUser();
+
+  if (!userIsManager) {
+    return null;
+  }
+
   return (
     <>
       {selectedItem ? (

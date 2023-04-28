@@ -3,6 +3,7 @@
 import Button from "@/app/components/design-system/Button";
 import Modal from "@/app/components/design-system/Modal";
 import Spinner from "@/app/components/design-system/Spinner";
+import { useCurrentUser } from "@/app/hooks/useCurrentUser";
 import { useModal } from "@/app/hooks/useModal";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
@@ -25,6 +26,11 @@ const ItemActionIcons = ({
   const [isFetching, setIsFetching] = useState(false);
   const isMutating = isPending || isFetching;
   const router = useRouter();
+  const { userIsManager } = useCurrentUser();
+
+  if (!userIsManager) {
+    return null;
+  }
 
   const onDeleteItem = async () => {
     setIsFetching(true);
@@ -50,6 +56,7 @@ const ItemActionIcons = ({
       setIsFetching(false);
     }
   };
+
   return (
     <>
       <Modal open={modalOpen} closeModal={closeModal}>
