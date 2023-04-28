@@ -1,6 +1,7 @@
 import { IoCloseOutline } from "react-icons/io5";
+import Button from "../../design-system/Button";
+import NavLink from "../../design-system/NavLink";
 import ActionButtons from "../ActionButtons";
-import NavLinks from "../NavLinks";
 import UserActions from "../UserActions";
 
 interface IDrawerContentProps {
@@ -8,6 +9,11 @@ interface IDrawerContentProps {
 }
 
 const DrawerContent = ({ closeDrawer }: IDrawerContentProps) => {
+  const onContactUsClick = () => {
+    closeDrawer();
+    window.scrollTo({ behavior: "smooth", top: document.body.scrollHeight });
+  };
+
   return (
     <div className="fixed right-0 z-10 h-full w-3/4 bg-zinc-800">
       <div className="flex flex-col justify-between h-full">
@@ -21,7 +27,17 @@ const DrawerContent = ({ closeDrawer }: IDrawerContentProps) => {
           </div>
           <div className="flex flex-col gap-10 items-center text-center">
             <div className="flex flex-col gap-4">
-              <NavLinks closeDrawer={closeDrawer} />
+              <NavLink text="Menu" href="/menu/food" onClick={closeDrawer} />
+              <NavLink
+                text="Gift Cards"
+                href="/gift-cards"
+                onClick={closeDrawer}
+              />
+              <Button
+                text="Contact Us"
+                onClick={onContactUsClick}
+                additionalClasses="h-0"
+              />
             </div>
             <div className="flex flex-col gap-4 mt-4">
               <ActionButtons />

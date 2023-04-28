@@ -4,8 +4,9 @@ import { useModal } from "@/app/hooks/useModal";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineMenu } from "react-icons/ai";
+import Button from "../design-system/Button";
+import NavLink from "../design-system/NavLink";
 import ActionButtons from "./ActionButtons";
-import NavLinks from "./NavLinks";
 import Drawer from "./drawer/Drawer";
 
 const Navbar = () => {
@@ -14,6 +15,10 @@ const Navbar = () => {
     openModal: openDrawer,
     closeModal: closeDrawer,
   } = useModal();
+
+  const onContactUsClick = () => {
+    window.scrollTo({ behavior: "smooth", top: document.body.scrollHeight });
+  };
 
   return (
     <>
@@ -29,7 +34,9 @@ const Navbar = () => {
         </Link>
         <div className="flex items-center gap-8">
           <div className="hidden md:flex items-center gap-4">
-            <NavLinks />
+            <NavLink text="Menu" href="/menu/food" />
+            <NavLink text="Gift Cards" href="/gift-cards" />
+            <Button text="Contact Us" onClick={onContactUsClick} />
           </div>
           <div className="hidden md:flex gap-4">
             <ActionButtons />
