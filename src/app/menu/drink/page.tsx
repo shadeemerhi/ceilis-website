@@ -6,6 +6,7 @@ import SpiritContent from "@/app/components/pages/menu/drink/spirit/SpiritConten
 const DrinkMenu = async () => {
   const response = await fetch(`${process.env.BASE_URL}/api/menu/drink`, {
     cache: "no-store",
+    next: { revalidate: 5 },
   });
 
   if (!response.ok) {

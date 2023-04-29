@@ -15,7 +15,7 @@ const Content = () => {
       <div className={`flex flex-col gap-10 md:flex-row px-6 md:px-20 py-16`}>
         <div className="relative aspect-square w-full md:w-1/2">
           <Image
-            src="/content-item-one.jpg"
+            src="https://xhmmmrnmnncvntnovvox.supabase.co/storage/v1/object/sign/images/static/content-item-one.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvc3RhdGljL2NvbnRlbnQtaXRlbS1vbmUucG5nIiwiaWF0IjoxNjgyODAxNjI3LCJleHAiOjE3MTQzMzc2Mjd9.ESzUz6Tp0RKiJcolq2Rh-6LtCDTWSEA9sHldFOe92vc&t=2023-04-29T20%3A53%3A47.879Z"
             alt="image"
             fill
             className="object-cover h-full w-full"
@@ -34,7 +34,7 @@ const Content = () => {
       >
         <div className="relative aspect-square w-full md:w-1/2">
           <Image
-            src="/content-item-two.jpg"
+            src="https://xhmmmrnmnncvntnovvox.supabase.co/storage/v1/object/sign/images/static/content-item-two.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvc3RhdGljL2NvbnRlbnQtaXRlbS10d28ucG5nIiwiaWF0IjoxNjgyODAxNjM0LCJleHAiOjE3MTQzMzc2MzR9.Ly-P2y42I9TF6o6y1EJGljgE408r2dqMK-YH_Z9s5G0&t=2023-04-29T20%3A53%3A54.614Z"
             alt="image"
             fill
             className="object-cover h-full w-full"

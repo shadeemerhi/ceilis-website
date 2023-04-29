@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: Request, res: Response) {
   try {
     const beerCategories = await prisma.beerCategory.findMany({
       include: {
