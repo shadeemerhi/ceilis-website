@@ -8,6 +8,7 @@ import Button from "../design-system/Button";
 import NavLink from "../design-system/NavLink";
 import ActionButtons from "./ActionButtons";
 import Drawer from "./drawer/Drawer";
+import { LIGHTSPEED_LINK } from "@/app/util/constants";
 
 const Navbar = () => {
   const {
@@ -35,7 +36,7 @@ const Navbar = () => {
         <div className="flex items-center gap-8">
           <div className="hidden md:flex items-center gap-4">
             <NavLink text="Menu" href="/menu/food" />
-            <NavLink text="Gift Cards" href="/gift-cards" />
+            <NavLink text="Gift Cards" href={LIGHTSPEED_LINK} />
             <Button text="Contact Us" onClick={onContactUsClick} />
           </div>
           <div className="hidden md:flex gap-4">

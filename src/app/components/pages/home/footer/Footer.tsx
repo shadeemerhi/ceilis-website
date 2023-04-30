@@ -6,6 +6,7 @@ import {
   BUSINESS_NAME,
   FACEBOOK_LINK,
   INSTAGRAM_LINK,
+  LIGHTSPEED_LINK,
 } from "@/app/util/constants";
 import Link from "next/link";
 import { IconType } from "react-icons";
@@ -35,7 +36,7 @@ const Footer = () => {
           </Link>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 text-center">
-          <NavLink text="Gift Cards" href="/gift-cards" />
+          <NavLink text="Gift Cards" href={LIGHTSPEED_LINK} />
           <NavLink text="About Us" href="/about" />
         </div>
         <BusinessInformation />
