@@ -13,7 +13,16 @@ const WineItem = ({ item, setSelectedItem }: IWineItemProps) => {
   return (
     <div className="flex justify-between">
       <div className="flex flex-col">
-        <span className="font-semibold text-sm sm:text-base">{item.name}</span>
+        <div className="flex flex-col">
+          <span className="font-semibold text-sm sm:text-base">
+            {item.name}
+          </span>
+          {item.name.includes("House") && (
+            <span className="text-xs italic text-zinc-500">
+              {WINE_SIZE_OPTIONS.slice(0, 2).map((size) => `${size}, `)} 1/2L
+            </span>
+          )}
+        </div>
         <span className="font-light text-zinc-500">{item.location}</span>
         <ItemActionIcons
           itemName={item.name}
