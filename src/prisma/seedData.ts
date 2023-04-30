@@ -263,18 +263,22 @@ export const wineCategories: Array<Omit<WineCategory, "id">> = [
   {
     name: "White Wine",
     description: null,
+    sizeNames: ["6oz", "9oz", "Bottle"],
   },
   {
     name: "Red Wine",
     description: null,
+    sizeNames: ["6oz", "9oz", "Bottle"],
   },
   {
     name: "Sparking Wine",
     description: null,
+    sizeNames: [],
   },
   {
     name: "Wine Cocktails",
     description: null,
+    sizeNames: [],
   },
 ];
 

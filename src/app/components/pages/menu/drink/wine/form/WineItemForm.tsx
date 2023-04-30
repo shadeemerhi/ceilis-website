@@ -47,12 +47,23 @@ const WineItemForm = ({ item, setSelectedItem }: IWineItemFormProps) => {
     }));
   };
 
+  const onPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
+
+    setItem((prev) => ({
+      ...prev,
+      price: parseFloat(parseFloat(value).toFixed(2)),
+    }));
+  };
+
   return (
     <div className="border-[1px] border-zinc-200 p-6 rounded-lg">
       <span className="text-xl">
         {item.id ? `Editing Item: ${item.name}` : "Creating Item"}
       </span>
-      <div className="grid grid-cols-2 gap-12 mt-6">
+      <div className="grid grid-cols-3 gap-12 mt-6">
         <div className="flex flex-col gap-1 flex-1">
           <label htmlFor="name">Name</label>
           <Input
@@ -71,6 +82,19 @@ const WineItemForm = ({ item, setSelectedItem }: IWineItemFormProps) => {
             onChange={onNameChange}
             value={wineItem.location || ""}
             placeholder="Location"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="price">Price</label>
+          <Input
+            id="price"
+            name="price"
+            onChange={onPriceChange}
+            value={wineItem.price?.toString()}
+            step="0.01"
+            min="0"
+            placeholder="Price"
+            type="number"
           />
         </div>
         <div className="col-span-2">

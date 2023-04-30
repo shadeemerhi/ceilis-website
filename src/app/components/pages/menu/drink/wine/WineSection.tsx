@@ -15,6 +15,7 @@ const WINE_ITEM_TEMPLATE: ICreateItemInput<IWineItem> = {
   categoryId: "",
   name: "",
   description: "",
+  price: 0,
   location: "",
   sizes: [],
 };
@@ -45,11 +46,13 @@ const WineSection = ({ category }: IWineSectionProps) => {
             />
           </div>
           <div className="flex font-bold text-right text-sm sm:text-base w-40 sm:w-56">
-            {WINE_SIZE_OPTIONS.map((size) => (
-              <span key={size} className="w-1/3">
-                {size}
-              </span>
-            ))}
+            {!!category.sizeNames.length
+              ? category.sizeNames.map((size) => (
+                  <span key={size} className="w-1/3">
+                    {size}
+                  </span>
+                ))
+              : null}
           </div>
         </div>
       </div>

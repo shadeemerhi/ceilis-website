@@ -130,6 +130,7 @@ model WineItem {
   name        String
   description String?
   location    String?
+  price       Float?
   sizes       Addition[]
   categoryId  String       @db.ObjectId
   category    WineCategory @relation(fields: [categoryId], references: [id])
@@ -139,6 +140,7 @@ model WineCategory {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String?
+  sizeNames   String[]
   items       WineItem[]
 }
 
