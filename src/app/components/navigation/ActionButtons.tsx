@@ -1,12 +1,11 @@
 "use client";
 
 import { LIGHTSPEED_LINK } from "@/app/util/constants";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Button from "../design-system/Button";
 import ReservationButton from "../reservations/ReservationButton";
 
 const ActionButtons = () => {
-  const router = useRouter();
   return (
     <>
       <ReservationButton
@@ -14,11 +13,13 @@ const ActionButtons = () => {
         variant="border"
         textColor="white"
       />
-      <Button
-        text="Order Now"
-        variant="border"
-        onClick={() => router.push(LIGHTSPEED_LINK)}
-      />
+      <Link
+        href={LIGHTSPEED_LINK}
+        className="w-full whitespace-nowrap"
+        target="_blank"
+      >
+        <Button text="Order Now" variant="border" />
+      </Link>
     </>
   );
 };
