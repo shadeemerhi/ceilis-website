@@ -15,7 +15,7 @@ const HappyHourSection = ({ type }: IHappyHourSectionProps) => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {HAPPY_HOUR_MENU[type].map((category) => (
-          <div className="flex flex-col gap-1">
+          <div key={category.title} className="flex flex-col gap-1">
             <span className="text-2xl font-bold">{category.title}</span>
             <span>{category.description}</span>
           </div>
