@@ -68,15 +68,16 @@ export const HAPPY_HOUR_MENU: IHappyHourMenu = {
     {
       title: "$6.95 Domestic Beers (16oz)",
       description:
-        "Canadian/Rickard’s Red/ Coors/ Coors lite, Tokyo IPA/Moose Head lager/ Steam Whistle Pilsner, Stanley Park Amber/ Grasshopper",
+        "Canadian, Rickard’s Red, Coors Banquet, Coors Light, Tokyo Drift IPA, Moose Head Lager, Steam Whistle Pilsner, Stanley Park Amber, Grasshopper",
     },
     {
       title: "$7.50 Premium (16oz)",
-      description: "Harp/Keith’s/B.Moon/Winter Ale/Radler/A.Orchard",
+      description:
+        "Harp, Alexander Keith’s, Belgian Moon, Winter Ale, Moosehead Radler, Angry Orchard",
     },
     {
       title: "$8.50",
-      description: "2oz Sangria Red/White/ 2oz Bellini",
+      description: "2oz Sangria Red/White & 2oz Bellinis",
     },
   ],
   FOOD: [
@@ -86,7 +87,7 @@ export const HAPPY_HOUR_MENU: IHappyHourMenu = {
     },
     {
       title: "$9.95",
-      description: "Perogies /Dry Ribs/Wings Mini Yorkies or Chili Lime Tacos",
+      description: "Perogies, Dry Ribs, Wings, Mini Yorkies, Chili Lime Tacos",
     },
     {
       title: "$15.95",
@@ -94,11 +95,11 @@ export const HAPPY_HOUR_MENU: IHappyHourMenu = {
     },
     {
       title: "$17.95",
-      description: "Beef Dip/ Reuben/ Chicken Club",
+      description: "Beef Dip, Reuben, Chicken Club",
     },
     {
       title: "$19.95",
-      description: "2pc Fish & Chips / Steak Sandwich",
+      description: "2pc Fish & Chips, Steak Sandwich",
     },
   ],
 };
