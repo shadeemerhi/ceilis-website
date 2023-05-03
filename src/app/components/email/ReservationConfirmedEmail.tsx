@@ -32,7 +32,7 @@ const ReservationConfirmedEmail = ({
           <Container className="rounded-lg py-8 text-center">
             <Section className="border border-solid border-[#eaeaea] rounded-md p-10">
               <Img
-                src={`https://ceilisroyaloak.com/wp-content/uploads/2020/05/cropped-ceilislogositeheader.png`}
+                src={`https://xhmmmrnmnncvntnovvox.supabase.co/storage/v1/object/public/images/static/ceilis-logo-black.png`}
                 className="h-10 w-auto"
                 alt="Ceilis"
               />
