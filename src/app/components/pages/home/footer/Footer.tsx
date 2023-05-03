@@ -20,7 +20,7 @@ import {
 import { RiFacebookFill } from "react-icons/ri";
 
 const LOCATION_ADDRESS = "#7155 8650 112 Ave NW, Calgary, AB T3R 0R5";
-const LOCATION_EMAIL = "royaloak@ceilis.com";
+const LOCATION_EMAIL = "contact@ceilisroyaloak.com";
 const LOCATION_PHONE = "587-352-0800";
 
 const Footer = () => {
