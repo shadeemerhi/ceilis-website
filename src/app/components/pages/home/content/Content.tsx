@@ -22,8 +22,8 @@ const Content = () => {
           />
         </div>
         <div className="flex flex-col justify-center items-center gap-4 flex-1">
-          <span className="text-4xl whitespace-nowrap">{`Section One Text`}</span>
-          <span className="text-lg font-light">{`This is some supplemental text`}</span>
+          <span className="text-4xl whitespace-nowrap">{`It's Patio Season!`}</span>
+          <span className="text-lg font-light text-center">{`Join us for a bite and a cold one on our newly opened patio`}</span>
           <Link href={"/menu/food"}>
             <Button text="View Menu" variant="border" textColor="black" />
           </Link>
@@ -41,8 +41,8 @@ const Content = () => {
           />
         </div>
         <div className="flex flex-col justify-center items-center gap-4 flex-1">
-          <span className="text-4xl whitespace-nowrap">{`Section Two Text`}</span>
-          <span className="text-lg font-light">{`This is some supplemental text`}</span>
+          <span className="text-4xl whitespace-nowrap">{`Where Good Food`}</span>
+          <span className="text-lg font-light">{`& good friends collide`}</span>
           <ReservationButton
             text="Reserve Now"
             variant="border"
