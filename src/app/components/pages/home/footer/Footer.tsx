@@ -19,7 +19,7 @@ import {
 } from "react-icons/hi";
 import { RiFacebookFill } from "react-icons/ri";
 
-const LOCATION_ADDRESS = "#7155 8650 112 Ave NW, Calgary, AB T3R 0R5";
+const LOCATION_ADDRESS = "8650 112 Ave NW, Calgary, AB T3R 0R5";
 const LOCATION_EMAIL = "contact@ceilisroyaloak.com";
 const LOCATION_PHONE = "587-352-0800";
 
@@ -60,31 +60,25 @@ const Footer = () => {
 const BusinessInformation = () => {
   return (
     <div className="flex flex-col gap-3 text-zinc-300">
-      <BusinessInformationItem
-        item={{ icon: HiOutlineLocationMarker, text: LOCATION_ADDRESS }}
-      />
-      <BusinessInformationItem
-        item={{ icon: HiOutlineMail, text: LOCATION_EMAIL }}
-      />
-      <BusinessInformationItem
-        item={{ icon: HiOutlinePhone, text: LOCATION_PHONE }}
-      />
-    </div>
-  );
-};
-
-const BusinessInformationItem = ({
-  item,
-}: {
-  item: {
-    icon: IconType;
-    text: string;
-  };
-}) => {
-  return (
-    <div className="flex flex-col sm:flex-row items-center gap-2">
-      <item.icon size={24} />
-      <span>{item.text}</span>
+      <Link
+        href={`https://maps.google.com/?q=Ceili's Royal Oak, ${LOCATION_ADDRESS}`}
+        target="_blank"
+        className="flex flex-col sm:flex-row items-center gap-2"
+      >
+        <HiOutlineLocationMarker size={24} />
+        <span>{LOCATION_ADDRESS}</span>
+      </Link>
+      <Link
+        href={`mailto:${LOCATION_EMAIL}`}
+        className="flex flex-col sm:flex-row items-center gap-2"
+      >
+        <HiOutlineMail size={24} />
+        <span>{LOCATION_EMAIL}</span>
+      </Link>
+      <div className="flex flex-col sm:flex-row items-center gap-2">
+        <HiOutlinePhone size={24} />
+        <span>{LOCATION_PHONE}</span>
+      </div>
     </div>
   );
 };
