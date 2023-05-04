@@ -25,11 +25,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <Script
+        id="google-tag-manager"
         strategy="lazyOnload"
         src="https://www.googletagmanager.com/gtag/js?id=G-RL052V2HRW"
       />
 
-      <Script strategy="lazyOnload">
+      <Script id="gtag-config" strategy="lazyOnload">
         {`window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
