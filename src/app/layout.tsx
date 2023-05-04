@@ -7,6 +7,7 @@ import { Providers } from "./providers";
 import ReservationModal from "./components/reservations/ReservationModal";
 import Footer from "./components/pages/home/footer/Footer";
 import { getCurrentUser } from "./util/helpers/users";
+import Script from "next/script";
 
 export const metadata = {
   title: "Ceili's Modern Irish Pub",
@@ -23,6 +24,19 @@ export default async function RootLayout({
   const user = await getCurrentUser();
   return (
     <html lang="en">
+      <Script
+        strategy="lazyOnload"
+        src="https://www.googletagmanager.com/gtag/js?id=G-RL052V2HRW"
+      />
+
+      <Script strategy="lazyOnload">
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      
+        gtag('config', 'G-RL052V2HRW');`}
+      </Script>
+
       <body className={`${albertSans.className} relative h-screen w-screen`}>
         <Providers user={user}>
           <div className="flex flex-col h-auto min-h-full">
