@@ -35,7 +35,7 @@ export default async function RootLayout({
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
       
-        gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID});`}
+        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');`}
       </Script>
 
       <body className={`${albertSans.className} relative h-screen w-screen`}>
