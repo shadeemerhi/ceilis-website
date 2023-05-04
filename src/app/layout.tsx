@@ -27,7 +27,7 @@ export default async function RootLayout({
       <Script
         id="google-tag-manager"
         strategy="lazyOnload"
-        src="https://www.googletagmanager.com/gtag/js?id=G-RL052V2HRW"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
       />
 
       <Script id="gtag-config" strategy="lazyOnload">
@@ -35,7 +35,7 @@ export default async function RootLayout({
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
       
-        gtag('config', 'G-RL052V2HRW');`}
+        gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID});`}
       </Script>
 
       <body className={`${albertSans.className} relative h-screen w-screen`}>
