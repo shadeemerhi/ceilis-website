@@ -88,12 +88,14 @@ const ReservationModal = () => {
       return;
     }
 
-    const isPastDate = new Date(reservation.date) <= new Date();
+    const isPastDate =
+      new Date(`${reservation.date}T00:00:00`).setHours(0, 0, 0, 0) <
+      new Date().setHours(0, 0, 0, 0);
 
     if (isPastDate) {
       setErrors((prev) => ({
         ...prev,
-        date: "Please select a future date",
+        date: "Please select either today or a future date",
       }));
       return;
     }
@@ -175,10 +177,6 @@ const ReservationModal = () => {
       if (!response.ok) {
         throw new Error("Failed to create reservation");
       }
-
-      const data = await response.json();
-
-      console.log("HERE IS DATA", data);
 
       setStep(4);
     } catch (error) {
