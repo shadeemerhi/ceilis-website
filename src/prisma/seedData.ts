@@ -5,7 +5,7 @@ import {
   WineCategory,
 } from "@prisma/client";
 
-export const foodCategories: Array<Omit<FoodCategory, "id">> = [
+export const foodCategories: Array<Omit<FoodCategory, "id" | "sort">> = [
   {
     name: "Starters",
     description: null,
