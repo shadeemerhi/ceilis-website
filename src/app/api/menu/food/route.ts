@@ -11,6 +11,9 @@ export async function GET() {
       include: {
         items: true,
       },
+      orderBy: {
+        sort: "asc",
+      },
     });
     return NextResponse.json({ categories });
   } catch (error) {

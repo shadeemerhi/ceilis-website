@@ -94,6 +94,7 @@ model FoodCategory {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
   name          String
   description   String?
+  sort          Int
   substitutions Addition[]
   additions     Addition[]
   items         FoodItem[]
