@@ -5,12 +5,13 @@ import {
   WineCategory,
 } from "@prisma/client";
 
-export const foodCategories: Array<Omit<FoodCategory, "id" | "sort">> = [
+export const foodCategories: Array<Omit<FoodCategory, "id">> = [
   {
     name: "Starters",
     description: null,
     additions: [],
     substitutions: [],
+    sort: 1,
   },
   {
     name: "Soups & Salads",
@@ -46,24 +47,28 @@ export const foodCategories: Array<Omit<FoodCategory, "id" | "sort">> = [
       },
     ],
     substitutions: [],
+    sort: 1,
   },
   {
     name: "Flatbreads",
     description: null,
     additions: [],
     substitutions: [],
+    sort: 1,
   },
   {
     name: "Features",
     description: null,
     additions: [],
     substitutions: [],
+    sort: 1,
   },
   {
     name: "Mains",
     description: null,
     additions: [],
     substitutions: [],
+    sort: 1,
   },
   {
     name: "Pasta",
@@ -71,6 +76,7 @@ export const foodCategories: Array<Omit<FoodCategory, "id" | "sort">> = [
       "All pasta is served with choice of sauce, salad and garlic toast",
     additions: [],
     substitutions: [],
+    sort: 1,
   },
   {
     name: "Burgers",
@@ -128,6 +134,7 @@ export const foodCategories: Array<Omit<FoodCategory, "id" | "sort">> = [
         price: 2.95,
       },
     ],
+    sort: 1,
   },
   {
     name: "Sandwiches",
@@ -167,12 +174,14 @@ export const foodCategories: Array<Omit<FoodCategory, "id" | "sort">> = [
       },
     ],
     substitutions: [],
+    sort: 1,
   },
   {
     name: "Dessert",
     description: null,
     additions: [],
     substitutions: [],
+    sort: 1,
   },
 ];
 
